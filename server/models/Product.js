@@ -8,6 +8,9 @@ const productSchema = new mongoose.Schema({
     image: { type: Array, required: true },
     category: { type: String, required: true },
     inStock: { type: Boolean, default: true },
+    isDeal: { type: Boolean, default: false },
+    dealBadge: { type: String },
+    dealDescription: { type: String },
 }, { timestamps: true })
 
 const Product = mongoose.models.product || mongoose.model('product', productSchema)

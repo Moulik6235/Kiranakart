@@ -11,6 +11,7 @@ const addressSchema = new mongoose.Schema({
     zipcode: { type: Number, required: true },
     country: { type: String, required: true },
     phone: { type: String, required: true },
+    category: { type: String, default: 'home' },
 })
 
 const Address = mongoose.models.Addess || mongoose.model('address', addressSchema)

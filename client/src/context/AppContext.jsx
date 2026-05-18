@@ -20,6 +20,25 @@ export const AppContextProvider = ({ children }) => {
     const [products, setProducts] = useState([])
     const [cartItems, setCartItems] = useState({})
     const [searchQuery, setSearchQuery] = useState({})
+    const [addresses, setAddresses] = useState([])
+    const [selectedAddress, setSelectedAddress] = useState(null)
+    const [deliveryTime, setDeliveryTime] = useState(23)
+
+    const getUserAddress = async () => {
+        try {
+            const { data } = await axios.get('/api/address/get');
+            if (data.success) {
+                setAddresses(data.addresses)
+                if (data.addresses.length > 0) {
+                    setSelectedAddress(data.addresses[0])
+                } else {
+                    setSelectedAddress(null)
+                }
+            }
+        } catch (error) {
+            console.error("Error fetching address in context:", error.message)
+        }
+    }
 
     // Fetch Seller Status
     const fetchSeller = async () => {
@@ -64,6 +83,12 @@ export const AppContextProvider = ({ children }) => {
 
     // Add product to cart
     const addToCart = (itemId) => {
+        if (!user) {
+            setShowUserLogin(true);
+            toast.error("Please login to add items to cart");
+            return;
+        }
+
         let cartData = structuredClone(cartItems);
 
         if (cartData[itemId]) {
@@ -112,6 +137,15 @@ export const AppContextProvider = ({ children }) => {
         fetchProducts()
     }, [])
 
+    useEffect(() => {
+        if (user) {
+            getUserAddress()
+        } else {
+            setAddresses([])
+            setSelectedAddress(null)
+        }
+    }, [user])
+
     // Update Database Cart Items
     useEffect(() => {
         const updateCart = async () => {
@@ -151,7 +185,7 @@ export const AppContextProvider = ({ children }) => {
     }
 
 
-    const value = { navigate, user, setUser, setIsSeller, isSeller, showUserLogin, setShowUserLogin, products, currency, addToCart, updateCartItem, removeFromCart, deleteFromCart, cartItems, searchQuery, setSearchQuery, getCartAmount, getCartCount, axios, fetchProducts , setCartItems}
+    const value = { navigate, user, setUser, setIsSeller, isSeller, showUserLogin, setShowUserLogin, products, currency, addToCart, updateCartItem, removeFromCart, deleteFromCart, cartItems, searchQuery, setSearchQuery, getCartAmount, getCartCount, axios, fetchProducts , setCartItems, addresses, setAddresses, selectedAddress, setSelectedAddress, deliveryTime, setDeliveryTime, getUserAddress}
     return <AppContext.Provider value={value}>
         {children}
     </AppContext.Provider>

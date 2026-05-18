@@ -1,0 +1,57 @@
+{
+  "success": true,
+  "products": [
+    {
+      "isDeal": false,
+      "_id": "6a0ae92708c886b772607e95",
+      "name": "Organic Bananas",
+      "description": [
+        "Fresh organic bananas"
+      ],
+      "price": 100,
+      "offerPrice": 80,
+      "image": [],
+      "category": "Vegetables",
+      "inStock": true,
+      "createdAt": "2026-05-18T10:25:43.423Z",
+      "updatedAt": "2026-05-18T10:25:43.423Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a0af3640e0715c60f8478e7",
+      "name": "Basmati Rice ",
+      "description": [
+        "Long and 2 years aged basmati rice"
+      ],
+      "price": 150,
+      "offerPrice": 99,
+      "image": [
+        "https://res.cloudinary.com/dzaiz6pgs/image/upload/v1779102564/tziuwgweqtaoa8keurw2.png"
+      ],
+      "category": "Grains",
+      "inStock": true,
+      "isDeal": false,
+      "createdAt": "2026-05-18T11:09:24.665Z",
+      "updatedAt": "2026-05-18T11:09:24.665Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a0af40b0e0715c60f8478f2",
+      "name": "Brown Rice",
+      "description": [
+        "Long Grain Brown Rice"
+      ],
+      "price": 200,
+      "offerPrice": 158,
+      "image": [
+        "https://res.cloudinary.com/dzaiz6pgs/image/upload/v1779102731/t1reg8tkqckvsi46h9ef.png"
+      ],
+      "category": "Grains",
+      "inStock": true,
+      "isDeal": false,
+      "createdAt": "2026-05-18T11:12:11.870Z",
+      "updatedAt": "2026-05-18T11:12:11.870Z",
+      "__v": 0
+    }
+  ]
+}

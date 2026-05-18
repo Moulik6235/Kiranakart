@@ -10,6 +10,7 @@ import productRouter from './routes/productRoute.js';
 import cartRouter from './routes/cartRoute.js';
 import addressRouter from './routes/addressRoute.js';
 import orderRouter from './routes/orderRoute.js';
+import storeRouter from './routes/storeRoute.js';
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -18,8 +19,7 @@ await connectDB()
 await connectCloudinary()
 
 
-// Allow multiple origins
-const allowedOrigins = ['http://localhost:5173', 'https://greencart-jet.vercel.app']
+const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175', 'https://greencart-jet.vercel.app']
 
 // Middlerware Configuration
 app.use(express.json());
@@ -33,6 +33,7 @@ app.use('/api/product', productRouter)
 app.use('/api/cart', cartRouter)
 app.use('/api/address', addressRouter)
 app.use('/api/order', orderRouter)
+app.use('/api/store', storeRouter)
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);

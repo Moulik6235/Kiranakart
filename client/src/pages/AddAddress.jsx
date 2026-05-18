@@ -29,6 +29,7 @@ const AddAddress = () => {
         zipcode: '',
         country: '',
         phone: '',
+        category: 'home',
     })
 
     const handleChange = (e) => {
@@ -92,6 +93,27 @@ const AddAddress = () => {
                         </div>
 
                         <InputField handleChange={handleChange} address={address} name='phone' type='text' placeholder='Mobile Number' />
+
+                        {/* Category Selector */}
+                        <div className="space-y-2 pt-2">
+                            <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider ml-1">Address Label</label>
+                            <div className="flex gap-4">
+                                {['home', 'Work', 'Other'].map((cat) => (
+                                    <button
+                                        type="button"
+                                        key={cat}
+                                        onClick={() => setAddress(prev => ({ ...prev, category: cat }))}
+                                        className={`flex-1 py-3 px-4 rounded-xl border text-sm font-extrabold transition-all duration-200 cursor-pointer ${
+                                            (address.category || 'home') === cat
+                                                ? 'bg-primary border-primary text-white shadow-sm'
+                                                : 'bg-surface-container-low border-outline-variant/30 text-gray-600 hover:bg-gray-50'
+                                        }`}
+                                    >
+                                        {cat === 'home' ? '🏠 Home' : cat === 'Work' ? '🏢 Work' : '📍 Other'}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
 
                         <button className='w-full mt-6 bg-primary text-white py-3.5 rounded-xl hover:bg-primary/95 hover:shadow-md active:scale-[0.99] transition-all duration-200 cursor-pointer font-bold tracking-wide uppercase'>
                             Save Address

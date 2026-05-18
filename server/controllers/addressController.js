@@ -28,3 +28,15 @@ export const getAddress = async (req, res) => {
     }
 }
 
+// Delete Address : /api/address/delete
+export const deleteAddress = async (req, res) => {
+    try {
+        const { addressId, userId } = req.body
+        await Address.findOneAndDelete({ _id: addressId, userId })
+        res.json({ success: true, message: "Address deleted successfully" })
+    } catch (error) {
+        console.log(error.message);
+        res.json({ success: false, message: error.message });
+    }
+}
+
