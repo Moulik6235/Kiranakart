@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 
 // Input Field Component
 const InputField = ({ type, placeholder, name, handleChange, address }) => (
-    <input className='w-full px-2 py-2.5 border border-gray-500/30 rounded outline-none text-gray-500 focus:border-primary transition'
+    <input className='w-full px-4 py-3 bg-surface-container-low border border-outline-variant/30 rounded-xl outline-none text-gray-700 placeholder-gray-400 focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 transition-all duration-200'
         type={type}
         placeholder={placeholder}
         onChange={handleChange}
@@ -17,7 +17,6 @@ const InputField = ({ type, placeholder, name, handleChange, address }) => (
 )
 
 const AddAddress = () => {
-
     const { axios, user, navigate } = useAppContext()
 
     const [address, setAddress] = useState({
@@ -61,19 +60,26 @@ const AddAddress = () => {
             navigate('/cart')
         }
     }, [])
+
     return (
-        <div className='mt-16 pb-16'>
-            <p className='text-2xl md:text-3xl text-gray-500'>Add Shipping  <span className='font-semibold text-primary'>Address</span></p>
-            <div className='flex flex-col-reverse md:flex-row justify-between mt-10'>
-                <div className='flex-1 max-w-md'>
-                    <form onSubmit={onSubmitHandler} className='space-y-3 mt-6 text-sm'>
+        <div className='mt-12 pb-16 max-w-6xl mx-auto px-4'>
+            <div className='flex flex-col mb-10'>
+                <h1 className='text-3xl font-extrabold text-gray-900 tracking-tight'>
+                    Add Shipping <span className='text-primary'>Address</span>
+                </h1>
+                <p className='text-gray-500 mt-2 text-sm'>Please fill in your primary home or office delivery location details.</p>
+            </div>
+
+            <div className='flex flex-col-reverse md:flex-row justify-between items-start gap-12 mt-4'>
+                <div className='flex-1 w-full max-w-lg bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-outline-variant/15'>
+                    <form onSubmit={onSubmitHandler} className='space-y-4 text-sm'>
                         <div className='grid grid-cols-2 gap-4'>
                             <InputField handleChange={handleChange} address={address} name='firstName' type='text' placeholder="First Name" />
                             <InputField handleChange={handleChange} address={address} name='lastName' type='text' placeholder="Last Name" />
                         </div>
 
                         <InputField handleChange={handleChange} address={address} name='email' type='email' placeholder='Email Address' />
-                        <InputField handleChange={handleChange} address={address} name='street' type='text' placeholder='Street' />
+                        <InputField handleChange={handleChange} address={address} name='street' type='text' placeholder='Street Name & House No.' />
 
                         <div className='grid grid-cols-2 gap-4'>
                             <InputField handleChange={handleChange} address={address} name='city' type='text' placeholder='City' />
@@ -85,18 +91,20 @@ const AddAddress = () => {
                             <InputField handleChange={handleChange} address={address} name='country' type='text' placeholder='Country' />
                         </div>
 
-                        <InputField handleChange={handleChange} address={address} name='phone' type='text' placeholder='Phone' />
+                        <InputField handleChange={handleChange} address={address} name='phone' type='text' placeholder='Mobile Number' />
 
-                        <button className='w-full mt-6 bg-primary text-white py-3 hover:bg-primary-dull transition cursor-pointer uppercase'>
+                        <button className='w-full mt-6 bg-primary text-white py-3.5 rounded-xl hover:bg-primary/95 hover:shadow-md active:scale-[0.99] transition-all duration-200 cursor-pointer font-bold tracking-wide uppercase'>
                             Save Address
                         </button>
-
                     </form>
                 </div>
-                <img className='md:mr-16 mb-16 md:mt-0' src={assets.add_address_image} alt="Add Address" />
+                <div className='flex-1 w-full flex justify-center items-center max-md:mb-4'>
+                    <img className='w-full max-w-sm rounded-3xl shadow-sm border border-outline-variant/10' src={assets.add_address_image} alt="Add Address" />
+                </div>
             </div>
         </div>
     )
 }
 
 export default AddAddress
+

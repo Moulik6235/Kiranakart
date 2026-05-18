@@ -1,30 +1,51 @@
 import React from 'react'
-import { assets } from '../assets/greencart_assets/assets'
 import { Link } from 'react-router-dom'
 
 const MainBanner = () => {
     return (
-        <div className='relative'>
-            <img src={assets.main_banner_bg} alt="banner" className='w-full hidden md:block' />
-            <img src={assets.main_banner_bg_sm} alt="banner" className='w-full md:hidden' />
-            <div className='absolute inset-0 flex flex-col items-center md:items-start justify-end md:justify-center pb-24 md:pb-0 px-4 md:pl-18 lg:pl-24'>
-                <h1 className='text-3xl md:text-4xl lg:text-5xl font-bold text-center md:text-left max-w-72 md:max-w-80 lg:max-w-105 leading-tight lg:leading-15'>Freshness You Can Trust, Savings You Will Love!</h1>
+        <div className="relative h-[320px] md:h-[480px] w-full rounded-3xl overflow-hidden shadow-md border border-outline-variant/10">
+            {/* Background Lifestyle Image */}
+            <img 
+                className="w-full h-full object-cover" 
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDja8BUW7jCNLFun8QbLzAQWwPIElrRKiouDHZtGtDbBMV_J0vkB-I_p0gGW4KOsadhVHAQrdFJ4J89TpbDurSu-PdpaN_GksYVx4Kgn9RYng3KQR9-yMWD-7LT-2W96v35fe0ZsdPLxOmbr8Num431_hHwNJrvLYiuBjcbyvv6NCOZ9leJLOsHUebdVPoNz4LgF27SQwfTRtYZlBXN_Tm5e4xaGragQ33gvQnRJuw0_1FRD7n-j09Vy0Pu6rXgLElru2f09ft-xSs" 
+                alt="Farm-fresh organic produce kitchen lifestyle" 
+            />
 
-
-                <div className='flex items-center mt-6 font-medium' >
-                    <Link to={"/products"} className='group flex items-center gap-2 px-7 md:px-9 py-3 bg-primary hover:bg-primary-dull transition rounded text-white cursor-pointer'>
-                        Shop Now
-                        <img className='md:hidden transition group-focus:translate-x-1' src={assets.white_arrow_icon} alt="arrow-icon" />
+            {/* Gradient Overlay & Typography */}
+            <div className="absolute inset-0 bg-gradient-to-r from-on-background/75 via-on-background/40 to-transparent flex flex-col justify-center px-6 md:px-12">
+                <span className="bg-secondary-container text-on-secondary-container text-xs md:text-sm font-extrabold px-3.5 py-1.5 rounded-full w-fit mb-4 uppercase tracking-widest">
+                    Premium Quality
+                </span>
+                
+                <h2 className="text-3xl md:text-5xl font-extrabold text-white max-w-sm md:max-w-xl mb-6 leading-tight tracking-tight">
+                    Farm-Fresh Joy, Delivered to Your Door in <span className="text-secondary-container font-black">10 Minutes</span>.
+                </h2>
+                
+                <div className="flex gap-4">
+                    <Link 
+                        to="/products" 
+                        className="bg-primary hover:bg-primary-container text-white font-bold px-6 py-3 md:px-8 md:py-4 rounded-xl shadow-lg active:scale-[0.98] transition-all duration-200 cursor-pointer text-sm"
+                    >
+                        Shop Fresh Now
                     </Link>
-
-                    <Link to={"/products"} className='group hidden md:flex items-center gap-2 px-9 py-3 cursor-pointer'>
-                        Explore Deals
-                        <img className='transition group-hover:translate-x-1' src={assets.black_arrow_icon} alt="arrow-icon" />
+                    <Link 
+                        to="/products" 
+                        className="bg-white/20 backdrop-blur-md hover:bg-white/30 text-white border border-white/40 font-bold px-6 py-3 md:px-8 md:py-4 rounded-xl active:scale-[0.98] transition-all duration-200 cursor-pointer text-sm"
+                    >
+                        View All Deals
                     </Link>
                 </div>
+            </div>
+
+            {/* Slider Controls */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+                <div className="w-8 md:w-12 h-1.5 bg-white rounded-full transition-all"></div>
+                <div className="w-1.5 md:w-2 h-1.5 bg-white/40 rounded-full transition-all"></div>
+                <div className="w-1.5 md:w-2 h-1.5 bg-white/40 rounded-full transition-all"></div>
             </div>
         </div>
     )
 }
 
 export default MainBanner
+

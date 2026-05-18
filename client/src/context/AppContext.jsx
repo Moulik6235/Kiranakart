@@ -30,7 +30,7 @@ export const AppContextProvider = ({ children }) => {
             } else {
                 setIsSeller(false)
             }
-        } catch (error) {
+        } catch {
             setIsSeller(false)
         }
     }
@@ -43,7 +43,7 @@ export const AppContextProvider = ({ children }) => {
                 setUser(data.user)
                 setCartItems(data.user.cartItems)
             }
-        } catch (error) {
+        } catch {
             setUser(null)
         }
     }
@@ -83,7 +83,7 @@ export const AppContextProvider = ({ children }) => {
         toast.success("Cart Updated")
     }
 
-    // Remove Product from cart
+    // Remove Product from cart (decrement)
     const removeFromCart = (itemId) => {
         let cartData = structuredClone(cartItems);
         if (cartData[itemId]) {
@@ -91,6 +91,16 @@ export const AppContextProvider = ({ children }) => {
             if (cartData[itemId] === 0) {
                 delete cartData[itemId];
             }
+        }
+        toast.success("Removed from Cart")
+        setCartItems(cartData)
+    }
+
+    // Delete Product entirely from cart
+    const deleteFromCart = (itemId) => {
+        let cartData = structuredClone(cartItems);
+        if (cartData[itemId]) {
+            delete cartData[itemId];
         }
         toast.success("Removed from Cart")
         setCartItems(cartData)
@@ -117,7 +127,7 @@ export const AppContextProvider = ({ children }) => {
         if (user) {
             updateCart()
         }
-    }, [cartItems])
+    }, [cartItems, user])
 
     // Get Cart Item Count
     const getCartCount = () => {
@@ -141,7 +151,7 @@ export const AppContextProvider = ({ children }) => {
     }
 
 
-    const value = { navigate, user, setUser, setIsSeller, isSeller, showUserLogin, setShowUserLogin, products, currency, addToCart, updateCartItem, removeFromCart, cartItems, searchQuery, setSearchQuery, getCartAmount, getCartCount, axios, fetchProducts , setCartItems}
+    const value = { navigate, user, setUser, setIsSeller, isSeller, showUserLogin, setShowUserLogin, products, currency, addToCart, updateCartItem, removeFromCart, deleteFromCart, cartItems, searchQuery, setSearchQuery, getCartAmount, getCartCount, axios, fetchProducts , setCartItems}
     return <AppContext.Provider value={value}>
         {children}
     </AppContext.Provider>

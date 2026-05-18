@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#e1e3e4",
+                        "primary": "#3525cd",
+                        "on-surface-variant": "#464555",
+                        "on-tertiary-container": "#67f4b7",
+                        "surface": "#f8f9fa",
+                        "secondary": "#855300",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "on-secondary-container": "#684000",
+                        "surface-tint": "#4d44e3",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#2e3132",
+                        "on-tertiary-fixed": "#002113",
+                        "on-primary-container": "#dad7ff",
+                        "on-background": "#191c1d",
+                        "outline-variant": "#c7c4d8",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e1e3e4",
+                        "on-primary-fixed": "#0f0069",
+                        "tertiary": "#005338",
+                        "primary-container": "#4f46e5",
+                        "secondary-fixed-dim": "#ffb95f",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "inverse-on-surface": "#f0f1f2",
+                        "primary-fixed": "#e2dfff",
+                        "surface-container": "#edeeef",
+                        "surface-container-low": "#f3f4f5",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#2a1700",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "surface-container-high": "#e7e8e9",
+                        "error": "#ba1a1a",
+                        "on-surface": "#191c1d",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "background": "#f8f9fa",
+                        "tertiary-container": "#006e4b",
+                        "surface-bright": "#f8f9fa",
+                        "surface-dim": "#d9dadb",
+                        "secondary-fixed": "#ffddb8",
+                        "secondary-container": "#fea619",
+                        "tertiary-fixed": "#6ffbbe",
+                        "inverse-primary": "#c3c0ff",
+                        "outline": "#777587"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "gutter": "16px",
+                        "sm": "8px",
+                        "container-margin-desktop": "48px",
+                        "container-margin-mobile": "16px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "title-lg": ["Plus Jakarta Sans"],
+                        "body-sm": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "body-default": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "label-sm": ["10px", {"lineHeight": "12px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-default": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface">
+<!-- Top Navigation Bar -->
+<header class="w-full top-0 sticky z-50 bg-surface-container-lowest shadow-sm">
+<div class="max-w-7xl mx-auto px-container-margin-desktop flex flex-col gap-sm py-md">
+<div class="flex items-center justify-between w-full">
+<!-- Brand Anchor -->
+<div class="flex items-center gap-md">
+<h1 class="text-headline-md font-headline-md text-primary tracking-tight">Fresh &amp; Local</h1>
+<!-- Desktop Links -->
+<nav class="hidden md:flex items-center gap-lg ml-lg">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-md text-label-md" href="#">Vegetables</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 font-label-md text-label-md" href="#">Fruits</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 font-label-md text-label-md" href="#">Dairy</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 font-label-md text-label-md" href="#">Meat</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 font-label-md text-label-md" href="#">Bakery</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 font-label-md text-label-md" href="#">Organic</a>
+</nav>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-md">
+<div class="hidden md:flex items-center bg-surface-container-low px-md py-xs rounded-full border border-outline-variant">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-sm w-48" placeholder="Search fresh produce..." type="text"/>
+</div>
+<div class="flex items-center gap-sm">
+<button class="p-sm text-on-surface-variant hover:text-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined">location_on</span>
+</button>
+<button class="p-sm text-on-surface-variant hover:text-primary transition-colors cursor-pointer relative">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="absolute top-0 right-0 bg-secondary text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">3</span>
+</button>
+<button class="p-sm text-on-surface-variant hover:text-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-container-margin-desktop space-y-xl py-lg">
+<!-- Hero Section -->
+<section class="relative h-[480px] w-full rounded-xl overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A premium high-resolution lifestyle photograph of a rustic wooden kitchen counter overflowing with vibrant, sun-drenched organic vegetables and fruits. The lighting is soft and natural, emphasizing the dew-kissed freshness of dark leafy greens, bright red tomatoes, and purple grapes. The background is a clean, minimalist urban kitchen in light mode, creating a neo-modern aesthetic with soft indigo accents in the decor." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDja8BUW7jCNLFun8QbLzAQWwPIElrRKiouDHZtGtDbBMV_J0vkB-I_p0gGW4KOsadhVHAQrdFJ4J89TpbDurSu-PdpaN_GksYVx4Kgn9RYng3KQR9-yMWD-7LT-2W96v35fe0ZsdPLxOmbr8Num431_hHwNJrvLYiuBjcbyvv6NCOZ9leJLOsHUebdVPoNz4LgF27SQwfTRtYZlBXN_Tm5e4xaGragQ33gvQnRJuw0_1FRD7n-j09Vy0Pu6rXgLElru2f09ft-xSs"/>
+<div class="absolute inset-0 bg-gradient-to-r from-on-background/60 to-transparent flex flex-col justify-center px-xl">
+<span class="bg-secondary-container text-on-secondary-fixed font-label-md text-label-md px-md py-xs rounded-full w-fit mb-md">PREMIUM QUALITY</span>
+<h2 class="font-display-lg text-display-lg text-white max-w-lg mb-md leading-tight">Farm-Fresh Joy, Delivered to Your Door in <span class="text-secondary-fixed">10 Minutes</span>.</h2>
+<div class="flex gap-md">
+<button class="bg-primary text-white font-label-md text-label-md px-xl py-md rounded-lg shadow-lg hover:bg-primary-container transition-all active:opacity-80">Shop Fresh Now</button>
+<button class="bg-white/20 backdrop-blur-md text-white border border-white/40 font-label-md text-label-md px-xl py-md rounded-lg hover:bg-white/30 transition-all">View All Deals</button>
+</div>
+</div>
+<!-- Slider Controls -->
+<div class="absolute bottom-md left-1/2 -translate-x-1/2 flex gap-sm">
+<div class="w-12 h-1.5 bg-white rounded-full"></div>
+<div class="w-3 h-1.5 bg-white/40 rounded-full"></div>
+<div class="w-3 h-1.5 bg-white/40 rounded-full"></div>
+</div>
+</section>
+<!-- Brand Promise Banner -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-lg bg-surface-container-low p-xl rounded-xl">
+<div class="flex items-center gap-md">
+<div class="bg-primary/10 p-md rounded-full text-primary">
+<span class="material-symbols-outlined !text-4xl">speed</span>
+</div>
+<div>
+<h4 class="font-title-lg text-title-lg text-on-surface">10 Min Delivery</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Blazing fast arrival from our local hubs.</p>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="bg-tertiary/10 p-md rounded-full text-tertiary">
+<span class="material-symbols-outlined !text-4xl">potted_plant</span>
+</div>
+<div>
+<h4 class="font-title-lg text-title-lg text-on-surface">Freshness Guarantee</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Picked at peak ripeness for your table.</p>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="bg-secondary/10 p-md rounded-full text-secondary">
+<span class="material-symbols-outlined !text-4xl">payments</span>
+</div>
+<div>
+<h4 class="font-title-lg text-title-lg text-on-surface">Lowest Prices</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Match our prices or we refund the gap.</p>
+</div>
+</div>
+</section>
+<!-- Shop by Category -->
+<section>
+<div class="flex items-center justify-between mb-lg">
+<h3 class="font-headline-md text-headline-md">Shop by Category</h3>
+<a class="text-primary font-label-md text-label-md flex items-center gap-xs" href="#">View All <span class="material-symbols-outlined text-[16px]">arrow_forward</span></a>
+</div>
+<div class="flex gap-lg overflow-x-auto hide-scrollbar py-sm">
+<div class="flex flex-col items-center gap-sm group cursor-pointer min-w-[100px]">
+<div class="w-20 h-20 rounded-full bg-surface-container-lowest shadow-sm flex items-center justify-center border border-outline-variant group-hover:border-primary group-hover:shadow-md transition-all">
+<img class="w-12 h-12 object-contain" data-alt="A clean circular icon featuring realistic organic vegetables like a vibrant carrot and a fresh broccoli floret, set against a pristine white background with soft shadows for a neo-modern e-commerce look." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPypRnA3NXwzigyloEhkYilwnaavAolMrdtjSiLr1PG3yGeAGLCSPQim_gQ0d1L28qBYZQlh-s0PtRHPoZJzqdaxVqmVc4WbknnC5qnaii4CZ0nUskqpiUxJtbGuv7nVo3969NHjhpLT2rPez_uVVUYvIJKdFCyxJzhsV3yN7v5Cgx4xmngEN5TK7SPKDBTlCTAFqqwD_kJtzyB4HMYuhy4ogJ7e86uhGdDDJMr3AJuK6ILY7Me_LbqfM-J4vdskn4puCqmMWe27w"/>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant group-hover:text-primary">Vegetables</span>
+</div>
+<div class="flex flex-col items-center gap-sm group cursor-pointer min-w-[100px]">
+<div class="w-20 h-20 rounded-full bg-surface-container-lowest shadow-sm flex items-center justify-center border border-outline-variant group-hover:border-primary group-hover:shadow-md transition-all">
+<img class="w-12 h-12 object-contain" data-alt="A detailed, hyper-realistic circular category icon depicting a fresh red apple and a bunch of yellow bananas on a soft light grey surface, styled in a minimalist, premium grocery app aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZyqto-dTnF5B_4kMrH6Az8f5nRpTFJHlQoyBzzGsDa5EWdy04ho72MlD7LqANZcU1VLUpp0MdJcTBrQ3ZypDKuY5sbHiK7y567ysbDjdOAsX8_3OAKZQ9lhm2CCS01-l1zKXXFXI_GLXB8EeXr3w1N5SBdai13WQb2mi693E0LygaXk25iZzmdXQYVZusBlrpfHueuCMbLcY0SacnNaXIRaFSuvoLqNx6inJoI9sKyj4C2r-UWx3Yi_ZM3h9C4xfYzLZPHBFKVRk"/>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant group-hover:text-primary">Fruits</span>
+</div>
+<div class="flex flex-col items-center gap-sm group cursor-pointer min-w-[100px]">
+<div class="w-20 h-20 rounded-full bg-surface-container-lowest shadow-sm flex items-center justify-center border border-outline-variant group-hover:border-primary group-hover:shadow-md transition-all">
+<img class="w-12 h-12 object-contain" data-alt="A modern e-commerce circular icon showcasing a glass bottle of milk and a wedge of gourmet cheese, emphasizing freshness and high quality through soft studio lighting and clean lines." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGZX6nDoDL1BZjqpihZx0lg7Ltf5lcNbEURbDSfT29vIlTUz4bO-kvyHX0QDjlNLKGYDCGkpB54rildFwdyrsohER5i2-C-bjn6edbxMe6ovhNY4KLrCUNNLqmPaU5OD59hhfEavzwvmgdgdDw5ANpH6zWvTmIQYhxFvmzQ5mWTsbPBGjqbSAqqxMI_MglxIsXqTsZel_Akze0RUWc8JT2_mPntlzf_RHm2I7skhhhEEXSPRb2V5b669Dsf7DvlwHczgJWrOOWzk0"/>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant group-hover:text-primary">Dairy</span>
+</div>
+<div class="flex flex-col items-center gap-sm group cursor-pointer min-w-[100px]">
+<div class="w-20 h-20 rounded-full bg-surface-container-lowest shadow-sm flex items-center justify-center border border-outline-variant group-hover:border-primary group-hover:shadow-md transition-all">
+<img class="w-12 h-12 object-contain" data-alt="A high-end circular category icon with a premium cut of meat and some herbs, presented on a minimalist white background to reflect a clean and professional fresh food delivery service." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHe2EXqVVTSr1QQGjnMB20c41_zWfLAx39YiUhGy8zvqBIZEj3tbEHtiDFSuxhN60Uy2H1S1YWhRHIU_wek35tcvwKqHTvxkDIB8_SpBOIOL08_OSF1OS_uj-27IrEfTPwIscyc1HElz8ABg6fnfIx7Ebl_EGKOetmfJy_XjPMvH2oSXwS4PzmuIytJ24U3zjf_KXNBagG0kdOg9pee1raYfPnt-JPJcXd5T0Ph1zjR-OOpn6gYuF37lPklyPXILjB72rvkllT1d4"/>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant group-hover:text-primary">Meat</span>
+</div>
+<div class="flex flex-col items-center gap-sm group cursor-pointer min-w-[100px]">
+<div class="w-20 h-20 rounded-full bg-surface-container-lowest shadow-sm flex items-center justify-center border border-outline-variant group-hover:border-primary group-hover:shadow-md transition-all">
+<img class="w-12 h-12 object-contain" data-alt="A warm, inviting circular icon of a golden-brown croissant and a crusty bread loaf, using soft lighting and warm tones to convey a bakery fresh product in a neo-modern UI layout." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAC5bd1zU192TvT7WndX3_SgyMeho5Y15WISR7f8JJ-KjNbxj6LztkaMIEojYrC1atl1Yi5wlmEHOmHdrWEjzNG5UOsxu6QDaRzcwY6Xy8MOrMyaAQBhrthwRs5Tg-5dzfDBhmzLaEJlQElZbrP37PgXgZqOWxPYR9D5q-tZzEG6LGlwGfr290fYBZeeUKh9xGOZA-O4wjyMDiiY3deynKKn8SlhzAsBuCn1rW55jECd-5RnJvgR8tqdTjaDHr5KuJewX116QYowWc"/>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant group-hover:text-primary">Bakery</span>
+</div>
+<div class="flex flex-col items-center gap-sm group cursor-pointer min-w-[100px]">
+<div class="w-20 h-20 rounded-full bg-surface-container-lowest shadow-sm flex items-center justify-center border border-outline-variant group-hover:border-primary group-hover:shadow-md transition-all">
+<img class="w-12 h-12 object-contain" data-alt="A sophisticated circular icon illustrating a green leaf and a natural honey jar, representing the organic and healthy category with a clean, airy, light mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6aBgS_4tanB37uZY5mcyps7TAgjPn9_ZcLVd9nf5fFS7laBGhWQuiGwLnPJLbjgQtsg-VhL9jNb5eC65uD_fhoss7kZSPlAIVBgouNjcFy-efTy42pu4LbOfgIIf39YXSRYmffUT1qbC5Zt1rDrEkpSvBNZFOg_-ud9uNV70PLhEgMTwTNZ4PUZGaud24aku0e7lMhUAOH3XoezTBqRHRZGXM_c7gKynG1WNvOHRAdgctG8nUkXYlSplwdF7t8Xj_PuA8nU77CHM"/>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant group-hover:text-primary">Organic</span>
+</div>
+</div>
+</section>
+<!-- Hot Deals Section -->
+<section>
+<div class="flex items-center gap-md mb-lg">
+<h3 class="font-headline-md text-headline-md">Hot Deals</h3>
+<div class="bg-error-container text-error px-md py-xs rounded-full flex items-center gap-xs font-label-md text-label-md">
+<span class="material-symbols-outlined text-[14px]">timer</span>
+                    ENDS IN 02:45:12
+                </div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<!-- Deal Card 1 -->
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant flex gap-lg relative group">
+<div class="w-1/3 aspect-square bg-surface-container rounded-lg overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional product shot of two ripe, halved avocados showing their creamy green interior and large brown pit. The avocados are set against a minimalist light grey background with soft shadows, highlighting their fresh and organic quality for a premium grocery app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiQIU9D-SSdAwExHd_qdaN3gyarlRt9M1TO93T-b4LaH7U4k0_Y2SsIEa9x3gIFiRDc-FAgoqRIVvFdgHNm_LvM8vsOxDvMIMVR6nU8Vae-gh2mdBB-ZgAVBcvKWKidVJ4MSF0-KeKwzcjgVzss_CjGVIIfaAGZV_RlSbFdeCThboKUBpDg450PSZ7SB4RDNP6guwPiJqBf89aKqyr6IObwjwCfgrwwkofzS9OYpuj5jDCuL9BFDXdfl5uJQPfAP-RPovCqC6afHc"/>
+</div>
+<div class="flex flex-col justify-between py-xs flex-1">
+<div>
+<span class="text-secondary font-label-sm text-label-sm bg-secondary/10 px-sm py-xs rounded uppercase tracking-wider">Save 40%</span>
+<h4 class="font-title-lg text-title-lg mt-xs">Premium Hass Avocados</h4>
+<p class="text-on-surface-variant font-body-sm text-body-sm">2 Pieces • Imported</p>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-baseline gap-sm">
+<span class="text-primary font-headline-md text-headline-md">₹180</span>
+<span class="text-on-surface-variant font-body-sm text-body-sm line-through">₹300</span>
+</div>
+<button class="bg-primary text-white p-sm rounded-lg hover:shadow-lg transition-all active:scale-95">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Deal Card 2 -->
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant flex gap-lg relative group">
+<div class="w-1/3 aspect-square bg-surface-container rounded-lg overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A high-resolution image of a transparent clamshell container filled with plump, juicy blueberries and bright red strawberries. The lighting is crisp and bright, creating highlights that emphasize the freshness of the berries in a modern light-mode interface style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAA8l3qve8rubghdSumEEETE7EVvRcX_YlxdRMprjpzt9y7ZNGKeGrr8v9rP-OLOpoVNhlMn-ddDUY476JGfSlQf6Yn9GFeTQ5W8jg87xOfo2xciVQ9Su7WBDW3b_IbWyTaas1eh7FmOAX2-sJ25YL2_7ZSgtCiYvbLFF6g5bEaUV4yUGbDn-lthLSdQgs9JSQXBqEgGAKUjwKbsmzO-wRx4TgUdd3IvFSPzlnkcQbYsum-PwTV8zBNhg9LorMpMMMSWxYybfSDcJQ"/>
+</div>
+<div class="flex flex-col justify-between py-xs flex-1">
+<div>
+<span class="text-secondary font-label-sm text-label-sm bg-secondary/10 px-sm py-xs rounded uppercase tracking-wider">Buy 1 Get 1</span>
+<h4 class="font-title-lg text-title-lg mt-xs">Mixed Berry Bliss Pack</h4>
+<p class="text-on-surface-variant font-body-sm text-body-sm">250g • Farm Picked</p>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-baseline gap-sm">
+<span class="text-primary font-headline-md text-headline-md">₹249</span>
+<span class="text-on-surface-variant font-body-sm text-body-sm line-through">₹498</span>
+</div>
+<button class="bg-primary text-white p-sm rounded-lg hover:shadow-lg transition-all active:scale-95">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Trending Now - Horizontal Scroll -->
+<section>
+<div class="flex items-center justify-between mb-lg">
+<h3 class="font-headline-md text-headline-md">Trending Now</h3>
+<div class="flex gap-sm">
+<button class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="flex gap-lg overflow-x-auto hide-scrollbar pb-lg">
+<!-- Product Card 1 -->
+<div class="min-w-[220px] bg-white rounded-xl border border-outline-variant group hover:shadow-xl transition-all p-sm">
+<div class="relative h-40 bg-surface-container-low rounded-lg mb-sm overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A premium glass bottle of whole milk with condensation on the outside, set in a bright, modern dairy farm setting with soft-focus grass in the background. The aesthetic is clean, professional, and emphasizes high-quality urban grocery delivery." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAis4FdK1tRRNy-RPdqgjj2wD_DPTRIFPIS1HcKMG2sntq6hNmvtNXbF8K0xUBpdFvkwn-K14rNhfvLfp4gWo8YIKtp-p5JwYeioN_H6auOluD-jTFrPblGvxwaupNxPKLgcH9Z7BCPuJRR2ojlt0YmZbHqdom0hmSEd1SeY3_W4Llp9_rD4-LmB8X0_WSQooGXYfRiHkT9XEf5EThPzWoZ7dxDzsaXkiE0SuHqGQu4q8foxzncPHoAVwcdYOQ-Jl7xI66OSKITG7E"/>
+<div class="absolute top-sm left-sm bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm px-sm py-xs rounded">10 MIN</div>
+</div>
+<div class="px-xs">
+<h5 class="font-label-md text-label-md text-on-surface leading-tight">A2 Whole Cow Milk</h5>
+<p class="text-on-surface-variant text-[12px] mb-sm">1 L • Glass Bottle</p>
+<div class="flex items-center justify-between">
+<span class="text-primary font-title-lg text-title-lg">₹85</span>
+<button class="bg-primary text-white px-md py-xs rounded-lg font-label-md text-label-md hover:bg-primary-container active:scale-95 transition-all">Add</button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="min-w-[220px] bg-white rounded-xl border border-outline-variant group hover:shadow-xl transition-all p-sm">
+<div class="relative h-40 bg-surface-container-low rounded-lg mb-sm overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A jar of raw organic wildflower honey with a wooden dipper resting on the lid. The golden liquid catches the light in a warm, inviting urban kitchen setting, following a neo-modern minimalist design style with sharp focus and vibrant colors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9X3zzhgkbMI0Ir-rknhkO88_IJ0ibdRWSaR7GvU853gtwxSII2d-znoNvxbOMko1W5rRdj__fCEPs7yNmil6xNS8ZeLEPIUDDLcFE2D6vUr2kql53A4ME6wcn64PurlnZ5icR_l8lX1QXNZILWQRqupqYWuoQjEor8Qhen5rH_URAQYM-8Bg0rkMUT2m-1zpcMAKTn6zV0tPfqf-fBU6_hNGCV_XTpszwmFdy923ggf7uWR9UKU0q2LnDtgSJ1BHGf5mUXMe-ZTI"/>
+<div class="absolute top-sm left-sm bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm px-sm py-xs rounded">10 MIN</div>
+</div>
+<div class="px-xs">
+<h5 class="font-label-md text-label-md text-on-surface leading-tight">Raw Organic Honey</h5>
+<p class="text-on-surface-variant text-[12px] mb-sm">500g • Forest Source</p>
+<div class="flex items-center justify-between">
+<span class="text-primary font-title-lg text-title-lg">₹420</span>
+<button class="bg-primary text-white px-md py-xs rounded-lg font-label-md text-label-md hover:bg-primary-container active:scale-95 transition-all">Add</button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="min-w-[220px] bg-white rounded-xl border border-outline-variant group hover:shadow-xl transition-all p-sm">
+<div class="relative h-40 bg-surface-container-low rounded-lg mb-sm overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A close-up shot of premium California almonds in a simple white ceramic bowl. The lighting is crisp, highlighting the textures of the almonds against a soft indigo-tinted background, fitting the high-energy yet minimal aesthetic of the brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNWRYuDhX5OFfWcMV_yuDwTa9QBBPXSVaJS9Y4KNqNGdluJPlNBIq6OzNCrL6gcsA3LlpAR02ZHyzFTghy86WbHnbnhHE1p1v3r9Ut2X0tJuPSEN76WAVK7Ui6Yy8k6WmDeB7vyFDTR1RnxtmIh7orwcsI0AdyWp2Vxga_Ri8smxfotig9oFyrygN--24hA0crOswkG2yUOgTLmG4wwLYlB1sP2zE6eQkobZsv7_Y2x55vH3O03nCdeiCDwbznV5kRn5uOxLjm3Xs"/>
+<div class="absolute top-sm left-sm bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm px-sm py-xs rounded">10 MIN</div>
+</div>
+<div class="px-xs">
+<h5 class="font-label-md text-label-md text-on-surface leading-tight">Premium Almonds</h5>
+<p class="text-on-surface-variant text-[12px] mb-sm">200g • Roasted</p>
+<div class="flex items-center justify-between">
+<span class="text-primary font-title-lg text-title-lg">₹310</span>
+<button class="bg-primary text-white px-md py-xs rounded-lg font-label-md text-label-md hover:bg-primary-container active:scale-95 transition-all">Add</button>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="min-w-[220px] bg-white rounded-xl border border-outline-variant group hover:shadow-xl transition-all p-sm">
+<div class="relative h-40 bg-surface-container-low rounded-lg mb-sm overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A stylish, dark-packaged artisanal coffee bag sitting on a clean marble countertop next to a white ceramic mug. The setting is bright and urban, emphasizing the premium quality and fast-delivery aspect of the grocery service." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrlI9vPMHgrROGlnVXr1Su4GimxukgpEm0A-BeIEEVErwn-3hirhJKEw4bzeKMkeLP51J5xtggCWZ-nxcXkBrJLffgqV2HZH7u-CXgl70LNoRDNxT7dUU1WIlnqDMNTmUXqef5URAP7sZLZt2hAbZ13JvzXvD7ttIvdvXKLh-MOtytiOnrsJWaZcoEKh2xzM4NVgNXEZX-L3Vexao66qX8gWwEQIileTS1m1Yq8Qm8Z2Hm2ch1KHQHnp73RT8x9PfnIft2hG8xBgU"/>
+<div class="absolute top-sm left-sm bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm px-sm py-xs rounded">10 MIN</div>
+</div>
+<div class="px-xs">
+<h5 class="font-label-md text-label-md text-on-surface leading-tight">Single Origin Coffee</h5>
+<p class="text-on-surface-variant text-[12px] mb-sm">250g • Ground</p>
+<div class="flex items-center justify-between">
+<span class="text-primary font-title-lg text-title-lg">₹550</span>
+<button class="bg-primary text-white px-md py-xs rounded-lg font-label-md text-label-md hover:bg-primary-container active:scale-95 transition-all">Add</button>
+</div>
+</div>
+</div>
+<!-- Product Card 5 -->
+<div class="min-w-[220px] bg-white rounded-xl border border-outline-variant group hover:shadow-xl transition-all p-sm">
+<div class="relative h-40 bg-surface-container-low rounded-lg mb-sm overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Vibrant, dew-covered baby spinach leaves arranged artistically on a white plate. The lighting is high-key and fresh, reinforcing the brand's promise of market-fresh produce delivered instantly to urban homes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1mgPUPYKBKPyRSeELnLI2WesoPW--jVlmfxgIdJDYvHpCt6F57TAywofijDGN8Azkzww_z5ILwYoXdvdCj5mK68pwhb7B4S9IdqtuW3467lytzoP1ZO8ZNkSKqOAYrXEFaSIOz8BhLL6PZLkI8MQQsLcetc-VfOBBjuIY1UnlLSSozbxbLoJ3x8Brg5yFFjiU0HshKxgpe5cjwoVuObKN5Z9icQL3wfNdKm6uRkUOyqki3LP3jkWo0fWXP1_evlBQ29Bo60SwOeo"/>
+<div class="absolute top-sm left-sm bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm px-sm py-xs rounded">10 MIN</div>
+</div>
+<div class="px-xs">
+<h5 class="font-label-md text-label-md text-on-surface leading-tight">Organic Baby Spinach</h5>
+<p class="text-on-surface-variant text-[12px] mb-sm">100g • Hydroponic</p>
+<div class="flex items-center justify-between">
+<span class="text-primary font-title-lg text-title-lg">₹45</span>
+<button class="bg-primary text-white px-md py-xs rounded-lg font-label-md text-label-md hover:bg-primary-container active:scale-95 transition-all">Add</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Newsletter / App Promo Asymmetric Section -->
+<section class="grid grid-cols-1 md:grid-cols-5 gap-lg">
+<div class="md:col-span-3 bg-primary-container text-white p-xl rounded-xl relative overflow-hidden flex flex-col justify-center">
+<div class="relative z-10">
+<h2 class="font-headline-lg text-headline-lg mb-sm">Get ₹100 Off Your First Order</h2>
+<p class="font-body-default text-body-default text-primary-fixed mb-lg max-w-md">Join 50,000+ happy customers who get their fresh groceries delivered in under 10 minutes.</p>
+<div class="flex gap-sm">
+<input class="bg-white/10 border border-white/20 px-md py-md rounded-lg flex-1 focus:ring-2 focus:ring-white outline-none placeholder:text-white/60" placeholder="Enter your email" type="email"/>
+<button class="bg-secondary-container text-on-secondary-fixed font-label-md text-label-md px-xl py-md rounded-lg shadow-lg hover:scale-105 transition-transform">Subscribe</button>
+</div>
+</div>
+<!-- Abstract Pattern background -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-24 -mt-24"></div>
+<div class="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full -ml-12 -mb-12"></div>
+</div>
+<div class="md:col-span-2 bg-surface-container-high rounded-xl p-xl flex flex-col items-center justify-center text-center border border-outline-variant">
+<span class="material-symbols-outlined !text-6xl text-primary mb-md">install_mobile</span>
+<h3 class="font-title-lg text-title-lg mb-sm">Download the App</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-lg">Scan to get the best experience on the go.</p>
+<div class="flex gap-md">
+<div class="bg-white p-sm rounded-lg border border-outline-variant">
+<img class="w-24 h-24" data-alt="A clean, minimalist QR code illustration displayed on a white background, symbolizing a quick and modern way to download a mobile application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBC2P21zUD67MCl2i1oxzn0N9z-pHSA6vCwHdOxyZ_D2DMS6LLeMmgGFOYxxJhwZXdmB5IS5BukeQQgE6Uitryj9f6k-L7gufupoLTA-ItzkUL5JwKUBdlWyP8Wlpyu9pfOR1MbyQ_TnGc4cQ3i4SueBxc8NTeHXkgMgCtOQ-zm8K_AE0Bl9WGAm054twLGwCrVo7ksS5Xv8l8rDB6hpEmuX0IqSwwKaHAMSCZO4GIZ1-Ycbb4dORsqxI-VCGf_aOoHMrjcMHuch8U"/>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-xl bg-surface-container-high border-t border-outline-variant">
+<div class="max-w-7xl mx-auto px-container-margin-desktop py-xl grid grid-cols-2 md:grid-cols-4 gap-lg">
+<div class="col-span-2 md:col-span-1">
+<h2 class="text-title-lg font-title-lg text-primary mb-md">Fresh &amp; Local</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-xs">Connecting you to the freshest local produce delivered with neo-modern speed.</p>
+<div class="flex gap-md mt-lg">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">social_leaderboard</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">language</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">share</span>
+</div>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface mb-md">Company</h4>
+<ul class="space-y-sm">
+<li><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">About Us</a></li>
+<li><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">Terms of Service</a></li>
+<li><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">Privacy Policy</a></li>
+<li><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">Store Locator</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface mb-md">Support</h4>
+<ul class="space-y-sm">
+<li><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">Contact Support</a></li>
+<li><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">Help Center</a></li>
+<li><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">Return Policy</a></li>
+<li><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">FAQs</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface mb-md">App</h4>
+<ul class="space-y-sm">
+<li><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">Download App</a></li>
+<li><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">Merchant Portal</a></li>
+<li><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">Delivery Partner</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-container-margin-desktop py-lg border-t border-outline-variant flex flex-col md:flex-row justify-between items-center gap-md">
+<p class="font-label-md text-label-md text-on-surface-variant">© 2024 Fresh &amp; Local. All rights reserved.</p>
+<div class="flex items-center gap-md">
+<span class="text-label-md font-label-md text-on-surface-variant">SECURE PAYMENTS</span>
+<span class="material-symbols-outlined text-on-surface-variant">payments</span>
+<span class="material-symbols-outlined text-on-surface-variant">credit_card</span>
+</div>
+</div>
+</footer>
+</body></html>

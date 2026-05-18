@@ -780,6 +780,46 @@ export const dummyProducts = [
     updatedAt: "2025-03-25T07:18:13.103Z",
     inStock: true,
   },
+  {
+    _id: "deal01avocado",
+    name: "Premium Hass Avocados",
+    category: "Fruits",
+    price: 300,
+    offerPrice: 180,
+    image: ["https://lh3.googleusercontent.com/aida-public/AB6AXuCiQIU9D-SSdAwExHd_qdaN3gyarlRt9M1TO93T-b4LaH7U4k0_Y2SsIEa9x3gIFiRDc-FAgoqRIVvFdgHNm_LvM8vsOxDvMIMVR6nU8Vae-gh2mdBB-ZgAVBcvKWKidVJ4MSF0-KeKwzcjgVzss_CjGVIIfaAGZV_RlSbFdeCThboKUBpDg450PSZ7SB4RDNP6guwPiJqBf89aKqyr6IObwjwCfgrwwkofzS9OYpuj5jDCuL9BFDXdfl5uJQPfAP-RPovCqC6afHc"],
+    description: [
+      "Rich, creamy texture",
+      "Loaded with healthy fats and fiber",
+      "Perfect for guacamole, salads, and toast",
+      "Imported premium quality"
+    ],
+    createdAt: "2025-03-25T07:17:46.018Z",
+    updatedAt: "2025-03-25T07:18:13.103Z",
+    inStock: true,
+    isDeal: true,
+    dealBadge: "Save 40%",
+    dealDescription: "2 Pieces • Imported"
+  },
+  {
+    _id: "deal02berry",
+    name: "Mixed Berry Bliss Pack",
+    category: "Fruits",
+    price: 498,
+    offerPrice: 249,
+    image: ["https://lh3.googleusercontent.com/aida-public/AB6AXuAA8l3qve8rubghdSumEEETE7EVvRcX_YlxdRMprjpzt9y7ZNGKeGrr8v9rP-OLOpoVNhlMn-ddDUY476JGfSlQf6Yn9GFeTQ5W8jg87xOfo2xciVQ9Su7WBDW3b_IbWyTaas1eh7FmOAX2-sJ25YL2_7ZSgtCiYvbLFF6g5bEaUV4yUGbDn-lthLSdQgs9JSQXBqEgGAKUjwKbsmzO-wRx4TgUdd3IvFSPzlnkcQbYsum-PwTV8zBNhg9LorMpMMMSWxYybfSDcJQ"],
+    description: [
+      "Handpicked fresh berries",
+      "Perfect mix of sweet and tart flavors",
+      "Loaded with powerful antioxidants",
+      "Great for breakfast, smoothies, and snacking"
+    ],
+    createdAt: "2025-03-25T07:17:46.018Z",
+    updatedAt: "2025-03-25T07:18:13.103Z",
+    inStock: true,
+    isDeal: true,
+    dealBadge: "Buy 1 Get 1",
+    dealDescription: "250g • Farm Picked"
+  },
 ];
 
 export const dummyAddress = [
