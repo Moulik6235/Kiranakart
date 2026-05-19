@@ -11,6 +11,8 @@ const productSchema = new mongoose.Schema({
     isDeal: { type: Boolean, default: false },
     dealBadge: { type: String },
     dealDescription: { type: String },
+    unit: { type: String },
+    quantityValue: { type: Number },
 }, { timestamps: true })
 
 const Product = mongoose.models.product || mongoose.model('product', productSchema)

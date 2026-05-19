@@ -23,7 +23,10 @@ const ProductCard = ({ product }) => {
             
             <div className="flex flex-col gap-1 mt-2">
                 <p className="text-outline text-xs font-semibold uppercase tracking-wider">{product.category}</p>
-                <p className="text-on-surface font-bold text-base md:text-lg leading-tight line-clamp-2 min-h-[44px]">{product.name}</p>
+                <p className="text-on-surface font-bold text-base md:text-lg leading-tight line-clamp-2 min-h-[44px]">
+                    {product.name}
+                    {product.quantityValue && product.unit ? ` (${product.quantityValue} ${product.unit})` : ''}
+                </p>
                 
                 <div className="flex items-center gap-1 mt-1 mb-2">
                     {Array(5).fill('').map((_, i) => (

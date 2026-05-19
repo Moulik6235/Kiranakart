@@ -11,6 +11,8 @@ const AddProduct = () => {
   const [category, setCategory] = useState('');
   const [price, setPrice] = useState('');
   const [offerPrice, setOfferPrice] = useState('');
+  const [unit, setUnit] = useState('');
+  const [quantityValue, setQuantityValue] = useState('');
 
   const { axios } = useAppContext()
 
@@ -22,15 +24,16 @@ const AddProduct = () => {
         name,
         description: description.split('\n'),
         category,
-        price,
-        offerPrice
+        price: Number(price),
+        offerPrice: Number(offerPrice),
+        unit,
+        quantityValue: Number(quantityValue)
       }
 
       const formData = new FormData();
       formData.append('productData', JSON.stringify(productData));
       for (let i = 0; i < files.length; i++) {
         formData.append('images', files[i])
-
       }
 
       const { data } = await axios.post('/api/product/add', formData)
@@ -42,6 +45,8 @@ const AddProduct = () => {
         setCategory('')
         setPrice('')
         setOfferPrice('')
+        setQuantityValue('')
+        setUnit('')
         setFiles([])
       } else {
         toast.error(data.message)
@@ -53,8 +58,6 @@ const AddProduct = () => {
   }
 
   return (
-
-
     <div className="no-scrollbar flex-1 h-[95vh] overflow-y-scroll flex flex-col justify-between">
       <form onSubmit={onSubmitHandler} className="md:p-10 p-4 space-y-5 max-w-lg">
         <div>
@@ -62,7 +65,6 @@ const AddProduct = () => {
           <div className="flex flex-wrap items-center gap-3 mt-2">
             {Array(4).fill('').map((_, index) => (
               <label key={index} htmlFor={`image${index}`}>
-
                 <input onChange={(e) => {
                   const upDatedFiles = [...files];
                   upDatedFiles[index] = e.target.files[0]
@@ -93,6 +95,40 @@ const AddProduct = () => {
             ))}
           </select>
         </div>
+
+        {/* Product Unit & Quantity Section */}
+        <div className="flex items-center gap-5 flex-wrap">
+          <div className="flex-1 flex flex-col gap-1 w-32">
+            <label className="text-base font-medium" htmlFor="quantity-value">Quantity / Size</label>
+            <input 
+              onChange={(e) => setQuantityValue(e.target.value)} 
+              value={quantityValue} 
+              id="quantity-value" 
+              type="number" 
+              placeholder="e.g. 500 or 1" 
+              className="outline-none md:py-2.5 py-2 px-3 rounded border border-gray-500/40" 
+              required 
+            />
+          </div>
+          <div className="flex-1 flex flex-col gap-1 w-32">
+            <label className="text-base font-medium" htmlFor="unit">Unit</label>
+            <select 
+              onChange={(e) => setUnit(e.target.value)} 
+              value={unit} 
+              id="unit" 
+              className="outline-none md:py-2.5 py-2 px-3 rounded border border-gray-500/40"
+              required
+            >
+              <option value="">Select Unit</option>
+              <option value="kg">kilo (kg)</option>
+              <option value="g">gram (g)</option>
+              <option value="ml">milliliter (ml)</option>
+              <option value="L">liter (L)</option>
+              <option value="pcs">pieces (pcs)</option>
+            </select>
+          </div>
+        </div>
+
         <div className="flex items-center gap-5 flex-wrap">
           <div className="flex-1 flex flex-col gap-1 w-32">
             <label className="text-base font-medium" htmlFor="product-price">Product Price</label>

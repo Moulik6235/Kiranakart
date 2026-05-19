@@ -24,7 +24,11 @@ const Navbar = () => {
         setDeliveryTime,
         getUserAddress,
         isSeller,
-        setIsSeller
+        setIsSeller,
+        showHelpModal,
+        setShowHelpModal,
+        darkMode,
+        setDarkMode
     } = useAppContext();
 
     const [showLocationModal, setShowLocationModal] = useState(false);
@@ -67,26 +71,9 @@ const Navbar = () => {
 
 
 
-    // Auto-login as seller and go directly to dashboard
-    const goToSeller = async () => {
-        try {
-            if (isSeller) {
-                navigate("/seller");
-                return;
-            }
-            const { data } = await axios.post('/api/seller/login', {
-                email: 'seller@kiranakart.com',
-                password: 'kirana123'
-            });
-            if (data.success) {
-                setIsSeller(true);
-                navigate("/seller");
-            } else {
-                toast.error(data.message || 'Seller login failed');
-            }
-        } catch (error) {
-            toast.error(error.message);
-        }
+    // Navigate to the seller portal (dashboard or login page)
+    const goToSeller = () => {
+        navigate("/seller");
     };
 
     const logout = async () => {
@@ -191,10 +178,26 @@ const Navbar = () => {
                                         My Orders
                                     </button>
                                     <button 
+                                        onClick={() => navigate("rewards")} 
+                                        className="w-full text-left px-4 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:text-[#4F46E5] transition duration-150 cursor-pointer flex items-center gap-2"
+                                    >
+                                        <span className="text-xs">🎁</span>
+                                        <span>Rewards & Offers</span>
+                                    </button>
+                                    <button 
                                         onClick={goToSeller} 
                                         className="w-full text-left px-4 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:text-[#4F46E5] transition duration-150 cursor-pointer"
                                     >
                                         Seller Account
+                                    </button>
+                                    <button 
+                                        onClick={() => setShowHelpModal(true)} 
+                                        className="w-full text-left px-4 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:text-[#4F46E5] transition duration-150 cursor-pointer flex items-center gap-2"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        Help & Support
                                     </button>
                                     <button 
                                         onClick={logout} 
@@ -217,10 +220,36 @@ const Navbar = () => {
                                     >
                                         Seller Account
                                     </button>
+                                    <button 
+                                        onClick={() => setShowHelpModal(true)} 
+                                        className="w-full text-left px-4 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:text-[#4F46E5] transition duration-150 cursor-pointer flex items-center gap-2 border-t border-gray-50 mt-1 pt-1.5"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        Help & Support
+                                    </button>
                                 </>
                             )}
                         </div>
                     </div>
+
+                    {/* Seamless Neon Dark Mode Toggle */}
+                    <button
+                        onClick={() => setDarkMode(!darkMode)}
+                        className="p-2.5 bg-gray-50 dark:bg-slate-800 text-gray-700 dark:text-yellow-400 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-150 dark:border-slate-700 rounded-xl transition duration-200 cursor-pointer shadow-3xs flex items-center justify-center shrink-0"
+                        title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                    >
+                        {darkMode ? (
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-amber-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
+                            </svg>
+                        ) : (
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-indigo-600" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                            </svg>
+                        )}
+                    </button>
 
                     <button 
                         onClick={() => {
@@ -303,10 +332,24 @@ const Navbar = () => {
                     {user ? (
                         <>
                             <NavLink className="text-gray-700 font-bold w-full border-b border-gray-50 pb-2 hover:text-[#4F46E5] transition" to='/my-orders' onClick={() => setOpen(false)} >My Orders</NavLink>
+                            <button className="text-gray-700 font-bold w-full border-b border-gray-50 pb-2 hover:text-[#4F46E5] transition text-left cursor-pointer flex items-center gap-2" onClick={() => { setOpen(false); setShowHelpModal(true); }} >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-gray-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                Help & Support
+                            </button>
                             <button className="text-gray-700 font-bold w-full border-b border-gray-50 pb-2 hover:text-[#4F46E5] transition text-left cursor-pointer" onClick={() => { setOpen(false); goToSeller(); }} >Seller Account</button>
                         </>
                     ) : (
-                        <button className="text-gray-700 font-bold w-full border-b border-gray-50 pb-2 hover:text-[#4F46E5] transition text-left cursor-pointer" onClick={() => { setOpen(false); goToSeller(); }} >Seller Account</button>
+                        <>
+                            <button className="text-gray-700 font-bold w-full border-b border-gray-50 pb-2 hover:text-[#4F46E5] transition text-left cursor-pointer flex items-center gap-2" onClick={() => { setOpen(false); setShowHelpModal(true); }} >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-gray-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                Help & Support
+                            </button>
+                            <button className="text-gray-700 font-bold w-full border-b border-gray-50 pb-2 hover:text-[#4F46E5] transition text-left cursor-pointer" onClick={() => { setOpen(false); goToSeller(); }} >Seller Account</button>
+                        </>
                     )}
 
                     {!user ? (

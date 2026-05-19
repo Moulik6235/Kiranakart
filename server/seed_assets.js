@@ -10,7 +10,7 @@ const productsToSeed = [
   // Vegetables
   {
     name: "Potato 500g",
-    category: "Vegetables",
+    category: "Fruits & Vegetables",
     price: 25,
     offerPrice: 20,
     image: ["/images/potato_image_1.png", "/images/potato_image_2.png", "/images/potato_image_3.png", "/images/potato_image_4.png"],
@@ -25,7 +25,7 @@ const productsToSeed = [
   },
   {
     name: "Tomato 1 kg",
-    category: "Vegetables",
+    category: "Fruits & Vegetables",
     price: 40,
     offerPrice: 35,
     image: ["/images/tomato_image.png"],
@@ -41,7 +41,7 @@ const productsToSeed = [
   },
   {
     name: "Carrot 500g",
-    category: "Vegetables",
+    category: "Fruits & Vegetables",
     price: 30,
     offerPrice: 28,
     image: ["/images/carrot_image.png"],
@@ -56,7 +56,7 @@ const productsToSeed = [
   },
   {
     name: "Spinach 500g",
-    category: "Vegetables",
+    category: "Fruits & Vegetables",
     price: 18,
     offerPrice: 15,
     image: ["/images/spinach_image_1.png"],
@@ -71,7 +71,7 @@ const productsToSeed = [
   },
   {
     name: "Onion 500g",
-    category: "Vegetables",
+    category: "Fruits & Vegetables",
     price: 22,
     offerPrice: 19,
     image: ["/images/onion_image_1.png"],
@@ -88,7 +88,7 @@ const productsToSeed = [
   // Fruits
   {
     name: "Apple 1 kg",
-    category: "Fruits",
+    category: "Fruits & Vegetables",
     price: 120,
     offerPrice: 110,
     image: ["/images/apple_image.png"],
@@ -105,7 +105,7 @@ const productsToSeed = [
   },
   {
     name: "Orange 1 kg",
-    category: "Fruits",
+    category: "Fruits & Vegetables",
     price: 80,
     offerPrice: 75,
     image: ["/images/orange_image.png"],
@@ -120,7 +120,7 @@ const productsToSeed = [
   },
   {
     name: "Banana 1 kg",
-    category: "Fruits",
+    category: "Fruits & Vegetables",
     price: 50,
     offerPrice: 45,
     image: ["/images/banana_image_1.png"],
@@ -135,7 +135,7 @@ const productsToSeed = [
   },
   {
     name: "Mango 1 kg",
-    category: "Fruits",
+    category: "Fruits & Vegetables",
 
     price: 150,
     offerPrice: 140,
@@ -151,7 +151,7 @@ const productsToSeed = [
   },
   {
     name: "Grapes 500g",
-    category: "Fruits",
+    category: "Fruits & Vegetables",
     price: 70,
     offerPrice: 65,
     image: ["/images/grapes_image_1.png"],
@@ -168,7 +168,7 @@ const productsToSeed = [
   // Dairy
   {
     name: "Amul Milk 1L",
-    category: "Dairy",
+    category: "Dairy, Bread & Eggs",
     price: 60,
     offerPrice: 55,
     image: ["/images/amul_milk_image.png"],
@@ -184,7 +184,7 @@ const productsToSeed = [
   },
   {
     name: "Paneer 200g",
-    category: "Dairy",
+    category: "Dairy, Bread & Eggs",
     price: 90,
     offerPrice: 85,
     image: ["/images/paneer_image.png"],
@@ -199,7 +199,7 @@ const productsToSeed = [
   },
   {
     name: "Eggs 12 pcs",
-    category: "Dairy",
+    category: "Dairy, Bread & Eggs",
     price: 90,
     offerPrice: 85,
     image: ["/images/eggs_image.png"],
@@ -214,7 +214,7 @@ const productsToSeed = [
   },
   {
     name: "Paneer 200g",
-    category: "Dairy",
+    category: "Dairy, Bread & Eggs",
     price: 90,
     offerPrice: 85,
     image: ["/images/paneer_image_2.png"],
@@ -229,7 +229,7 @@ const productsToSeed = [
   },
   {
     name: "Cheese 200g",
-    category: "Dairy",
+    category: "Dairy, Bread & Eggs",
     price: 140,
     offerPrice: 130,
     image: ["/images/cheese_image.png"],
@@ -246,7 +246,7 @@ const productsToSeed = [
   // Drinks
   {
     name: "Coca-Cola 1.5L",
-    category: "Drinks",
+    category: "Cold Drinks & Juices",
     price: 80,
     offerPrice: 75,
     image: ["/images/coca_cola_image.png"],
@@ -261,7 +261,7 @@ const productsToSeed = [
   },
   {
     name: "Pepsi 1.5L",
-    category: "Drinks",
+    category: "Cold Drinks & Juices",
     price: 78,
     offerPrice: 73,
     image: ["/images/pepsi_image.png"],
@@ -276,7 +276,7 @@ const productsToSeed = [
   },
   {
     name: "Sprite 1.5L",
-    category: "Drinks",
+    category: "Cold Drinks & Juices",
     price: 79,
     offerPrice: 74,
     image: ["/images/sprite_image_1.png"],
@@ -291,7 +291,7 @@ const productsToSeed = [
   },
   {
     name: "Fanta 1.5L",
-    category: "Drinks",
+    category: "Cold Drinks & Juices",
     price: 77,
     offerPrice: 72,
     image: ["/images/fanta_image_1.png"],
@@ -306,7 +306,7 @@ const productsToSeed = [
   },
   {
     name: "7 Up 1.5L",
-    category: "Drinks",
+    category: "Cold Drinks & Juices",
     price: 76,
     offerPrice: 71,
     image: ["/images/seven_up_image_1.png"],
@@ -323,7 +323,7 @@ const productsToSeed = [
   // Grains
   {
     name: "Basmati Rice 5kg",
-    category: "Grains",
+    category: "Atta, Rice & Dal",
     price: 550,
     offerPrice: 520,
     image: ["/images/basmati_rice_image.png"],
@@ -338,7 +338,7 @@ const productsToSeed = [
   },
   {
     name: "Wheat Flour 5kg",
-    category: "Grains",
+    category: "Atta, Rice & Dal",
     price: 250,
     offerPrice: 230,
     image: ["/images/wheat_flour_image.png"],
@@ -353,7 +353,7 @@ const productsToSeed = [
   },
   {
     name: "Organic Quinoa 500g",
-    category: "Grains",
+    category: "Atta, Rice & Dal",
     price: 450,
     offerPrice: 420,
     image: ["/images/quinoa_image.png"],
@@ -368,7 +368,7 @@ const productsToSeed = [
   },
   {
     name: "Brown Rice 1kg",
-    category: "Grains",
+    category: "Atta, Rice & Dal",
     price: 120,
     offerPrice: 110,
     image: ["/images/brown_rice_image.png"],
@@ -383,7 +383,7 @@ const productsToSeed = [
   },
   {
     name: "Barley 1kg",
-    category: "Grains",
+    category: "Atta, Rice & Dal",
     price: 150,
     offerPrice: 140,
     image: ["/images/barley_image.png"],
@@ -400,7 +400,7 @@ const productsToSeed = [
   // Bakery
   {
     name: "Brown Bread 400g",
-    category: "Bakery",
+    category: "Bakery & Biscuits",
     price: 40,
     offerPrice: 35,
     image: ["/images/brown_bread_image.png"],
@@ -415,7 +415,7 @@ const productsToSeed = [
   },
   {
     name: "Butter Croissant 100g",
-    category: "Bakery",
+    category: "Bakery & Biscuits",
     price: 50,
     offerPrice: 45,
     image: ["/images/butter_croissant_image.png"],
@@ -430,7 +430,7 @@ const productsToSeed = [
   },
   {
     name: "Chocolate Cake 500g",
-    category: "Bakery",
+    category: "Bakery & Biscuits",
     price: 350,
     offerPrice: 325,
     image: ["/images/chocolate_cake_image.png"],
@@ -445,7 +445,7 @@ const productsToSeed = [
   },
   {
     name: "Whole Bread 400g",
-    category: "Bakery",
+    category: "Bakery & Biscuits",
     price: 45,
     offerPrice: 40,
     image: ["/images/whole_wheat_bread_image.png"],
@@ -460,7 +460,7 @@ const productsToSeed = [
   },
   {
     name: "Vanilla Muffins 6 pcs",
-    category: "Bakery",
+    category: "Bakery & Biscuits",
     price: 100,
     offerPrice: 90,
     image: ["/images/vanilla_muffins_image.png"],
@@ -477,7 +477,7 @@ const productsToSeed = [
   // Instant
   {
     name: "Maggi Noodles 280g",
-    category: "Instant",
+    category: "Breakfast & Instant Food",
 
     price: 55,
     offerPrice: 50,
@@ -493,7 +493,7 @@ const productsToSeed = [
   },
   {
     name: "Top Ramen 270g",
-    category: "Instant",
+    category: "Breakfast & Instant Food",
     price: 45,
     offerPrice: 40,
     image: ["/images/top_ramen_image.png"],
@@ -508,7 +508,7 @@ const productsToSeed = [
   },
   {
     name: "Knorr Cup Soup 70g",
-    category: "Instant",
+    category: "Breakfast & Instant Food",
     price: 35,
     offerPrice: 30,
     image: ["/images/knorr_soup_image.png"],
@@ -523,7 +523,7 @@ const productsToSeed = [
   },
   {
     name: "Yippee Noodles 260g",
-    category: "Instant",
+    category: "Breakfast & Instant Food",
     price: 50,
     offerPrice: 45,
     image: ["/images/yippee_image.png"],
@@ -538,7 +538,7 @@ const productsToSeed = [
   },
   {
     name: "Oats Noodles 72g",
-    category: "Instant",
+    category: "Breakfast & Instant Food",
     price: 40,
     offerPrice: 35,
     image: ["/images/maggi_oats_image.png"],
@@ -553,7 +553,7 @@ const productsToSeed = [
   },
   {
     name: "Premium Hass Avocados",
-    category: "Fruits",
+    category: "Fruits & Vegetables",
     price: 300,
     offerPrice: 180,
     image: ["https://lh3.googleusercontent.com/aida-public/AB6AXuCiQIU9D-SSdAwExHd_qdaN3gyarlRt9M1TO93T-b4LaH7U4k0_Y2SsIEa9x3gIFiRDc-FAgoqRIVvFdgHNm_LvM8vsOxDvMIMVR6nU8Vae-gh2mdBB-ZgAVBcvKWKidVJ4MSF0-KeKwzcjgVzss_CjGVIIfaAGZV_RlSbFdeCThboKUBpDg450PSZ7SB4RDNP6guwPiJqBf89aKqyr6IObwjwCfgrwwkofzS9OYpuj5jDCuL9BFDXdfl5uJQPfAP-RPovCqC6afHc"],
@@ -572,7 +572,7 @@ const productsToSeed = [
   },
   {
     name: "Mixed Berry Bliss Pack",
-    category: "Fruits",
+    category: "Fruits & Vegetables",
     price: 498,
     offerPrice: 249,
     image: ["https://lh3.googleusercontent.com/aida-public/AB6AXuAA8l3qve8rubghdSumEEETE7EVvRcX_YlxdRMprjpzt9y7ZNGKeGrr8v9rP-OLOpoVNhlMn-ddDUY476JGfSlQf6Yn9GFeTQ5W8jg87xOfo2xciVQ9Su7WBDW3b_IbWyTaas1eh7FmOAX2-sJ25YL2_7ZSgtCiYvbLFF6g5bEaUV4yUGbDn-lthLSdQgs9JSQXBqEgGAKUjwKbsmzO-wRx4TgUdd3IvFSPzlnkcQbYsum-PwTV8zBNhg9LorMpMMMSWxYybfSDcJQ"],

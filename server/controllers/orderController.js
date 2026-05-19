@@ -7,7 +7,7 @@ import User from "../models/User.js"
 
 export const placeOrderCOD = async (req, res) => {
     try {
-        const { userId, items, address } = req.body;
+        const { userId, items, address, discount } = req.body;
         if (!address || items.length === 0) {
             return res.json({ success: false, message: "Invalid Data" })
         }
@@ -19,8 +19,11 @@ export const placeOrderCOD = async (req, res) => {
         }, 0)
 
         // Add Tax Charge (2%)
-
         amount += Math.floor(amount * 0.02);
+
+        if (discount) {
+            amount = Math.max(0, amount - Number(discount));
+        }
 
         await Order.create({
             userId,
@@ -43,7 +46,7 @@ export const placeOrderCOD = async (req, res) => {
 // Place Order Mock UPI :  /api/order/mock-upi
 export const placeOrderMockUPI = async (req, res) => {
     try {
-        const { userId, items, address } = req.body;
+        const { userId, items, address, discount } = req.body;
         if (!address || items.length === 0) {
             return res.json({ success: false, message: "Invalid Data" })
         }
@@ -62,6 +65,10 @@ export const placeOrderMockUPI = async (req, res) => {
 
         // Add Tax Charge (2%)
         amount += Math.floor(amount * 0.02);
+
+        if (discount) {
+            amount = Math.max(0, amount - Number(discount));
+        }
 
         const order = await Order.create({
             userId,
@@ -131,6 +138,20 @@ export const getAllOrders = async (req, res) => {
             $or: [{ paymentType: "COD" }, { isPaid: true }]
         }).populate("items.product address")
         res.json({ success: true, orders });
+    } catch (error) {
+        res.json({ success: false, message: error.message });
+    }
+}
+
+// Cancel Order: /api/order/cancel
+export const cancelOrder = async (req, res) => {
+    try {
+        const { orderId } = req.body;
+        const order = await Order.findByIdAndUpdate(orderId, { status: 'Cancelled' }, { new: true });
+        if (!order) {
+            return res.json({ success: false, message: "Order not found" });
+        }
+        res.json({ success: true, message: "Order Cancelled Successfully", order });
     } catch (error) {
         res.json({ success: false, message: error.message });
     }

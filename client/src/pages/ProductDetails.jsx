@@ -50,7 +50,10 @@ const ProductDetails = () => {
                 </div>
 
                 <div className="text-sm w-full md:w-1/2 flex flex-col justify-center">
-                    <h1 className="text-3xl md:text-4xl font-extrabold text-on-surface leading-tight tracking-tight">{product.name}</h1>
+                    <h1 className="text-3xl md:text-4xl font-extrabold text-on-surface leading-tight tracking-tight">
+                        {product.name}
+                        {product.quantityValue && product.unit ? ` (${product.quantityValue} ${product.unit})` : ''}
+                    </h1>
 
                     <div className="flex items-center gap-1 mt-3">
                         {Array(5).fill('').map((_, i) => (

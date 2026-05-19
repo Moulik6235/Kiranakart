@@ -49,8 +49,14 @@ body {
   color: var(--color-on-background);
 }
 
-.no-scrollbar::-webkit-scrollbar {
+.no-scrollbar::-webkit-scrollbar,
+.hide-scrollbar::-webkit-scrollbar {
   display: none;
+}
+.no-scrollbar,
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 @keyframes slideInRight {
@@ -78,4 +84,86 @@ body {
 .animate-fadeIn {
   animation: fadeIn 0.2s ease-out forwards;
 }
+
+/* Seamless Neon Dark Mode Support overrides */
+html.dark {
+  --color-background: #090d16;
+  --color-on-background: #f8fafc;
+  
+  --color-surface: #111827;
+  --color-surface-dim: #030712;
+  --color-surface-bright: #1f2937;
+  --color-surface-container-lowest: #1f2937;
+  --color-surface-container-low: #111827;
+  --color-surface-container: #1f2937;
+  --color-surface-container-high: #374151;
+  --color-surface-container-highest: #4b5563;
+  
+  --color-on-surface: #f8fafc;
+  --color-on-surface-variant: #cbd5e1;
+  --color-outline: #4b5563;
+  --color-outline-variant: #374151;
+}
+
+html.dark body {
+  background-color: #090d16;
+  color: #f1f5f9;
+}
+
+html.dark .bg-white,
+html.dark .bg-surface-container-lowest,
+html.dark .bg-slate-50 {
+  background-color: #111827 !important;
+  color: #f8fafc !important;
+  border-color: #1e293b !important;
+}
+
+html.dark .text-gray-900,
+html.dark .text-gray-800,
+html.dark .text-gray-750,
+html.dark .text-gray-700 {
+  color: #f1f5f9 !important;
+}
+
+html.dark .text-gray-600,
+html.dark .text-gray-500,
+html.dark .text-gray-400 {
+  color: #94a3b8 !important;
+}
+
+html.dark .bg-gray-50,
+html.dark .bg-[#F9FAFB],
+html.dark .bg-[#F8F8F8],
+html.dark .bg-[#F4F6F8] {
+  background-color: #1e293b !important;
+  color: #f1f5f9 !important;
+}
+
+html.dark .border-gray-100,
+html.dark .border-gray-150,
+html.dark .border-gray-200 {
+  border-color: #1e293b !important;
+}
+
+html.dark .shadow-sm {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2) !important;
+}
+
+html.dark input, 
+html.dark textarea {
+  background-color: #1e293b !important;
+  color: #f1f5f9 !important;
+  border-color: #334155 !important;
+}
+
+html.dark .sticky {
+  background-color: #090d16 !important;
+  border-color: #1e293b !important;
+}
+
+html.dark a.hover\:text-gray-900:hover, 
+html.dark span.hover\:text-gray-900:hover {
+  color: #ffffff !important;
+}
+
 

@@ -35,11 +35,21 @@ const Cart = () => {
     const [selectedTip, setSelectedTip] = useState(null) // null, 20, 30, 50, 'custom'
     const [customTip, setCustomTip] = useState("")
 
+    // Coupon States
+    const [couponCode, setCouponCode] = useState("")
+    const [appliedCoupon, setAppliedCoupon] = useState(null)
+    const [unlockedCoupons, setUnlockedCoupons] = useState([])
+
     // Store Settings (seller-controlled charges)
     const [storeSettings, setStoreSettings] = useState({
         deliveryEnabled: true, deliveryCharge: 30, deliveryLabel: 'Delivery charge',
         surgeEnabled: true, surgeCharge: 30, surgeLabel: 'Surge charge'
     })
+
+    useEffect(() => {
+        const existing = JSON.parse(localStorage.getItem('kiranakart_unlocked_coupons') || '[]');
+        setUnlockedCoupons(existing);
+    }, [])
 
     useEffect(() => {
         axios.get('/api/store/settings').then(({ data }) => {
@@ -73,7 +83,74 @@ const Cart = () => {
         ? (Number(customTip) || 0) 
         : (selectedTip || 0)
 
-    const grandTotal = itemsTotal + deliveryCharge + handlingCharge + surgeCharge + donationAmount + tipAmount
+    // Calculate Coupon discount
+    const getDiscountAmount = () => {
+        if (!appliedCoupon) return 0;
+        if (appliedCoupon.type === 'flat') {
+            return Math.min(itemsTotal, appliedCoupon.value);
+        } else if (appliedCoupon.type === 'category') {
+            const matchingItemsTotal = cartArray.reduce((acc, item) => 
+                item.category === appliedCoupon.category 
+                    ? acc + (item.offerPrice * item.quantity) 
+                    : acc, 
+                0
+            );
+            return Math.round((matchingItemsTotal * appliedCoupon.value) / 100);
+        }
+        return 0;
+    };
+
+    const discountAmount = getDiscountAmount();
+
+    const grandTotal = Math.max(0, itemsTotal - discountAmount + deliveryCharge + handlingCharge + surgeCharge + donationAmount + tipAmount)
+
+    const handleApplyCoupon = (codeToApply) => {
+        const code = (codeToApply || couponCode).trim().toUpperCase();
+        if (!code) {
+            return toast.error("Please enter a coupon code");
+        }
+
+        // 1. Flat coupon matching (KIRANA followed by number up to 50)
+        const flatMatch = code.match(/^KIRANA(\d+)$/);
+        if (flatMatch) {
+            const val = parseInt(flatMatch[1], 10);
+            if (val > 50) {
+                return toast.error("Maximum flat coupon discount is ₹50!");
+            }
+            setAppliedCoupon({ code, type: 'flat', value: val });
+            toast.success(`🎉 Flat ₹${val} coupon applied successfully!`);
+            setCouponCode("");
+            return;
+        }
+
+        // 2. Category coupon matching
+        const categoryMap = {
+            'DRINK25': { cat: 'Cold Drinks & Juices', val: 25 },
+            'SNACK20': { cat: 'Snacks & Munchies', val: 20 },
+            'DAIRY15': { cat: 'Dairy, Bread & Eggs', val: 15 },
+            'FRESH30': { cat: 'Fruits & Vegetables', val: 30 },
+            'PAAN50': { cat: 'Paan Corner', val: 50 }
+        };
+
+        if (categoryMap[code]) {
+            const { cat, val } = categoryMap[code];
+            const hasCategory = cartArray.some(item => item.category === cat);
+            if (!hasCategory) {
+                return toast.error(`Coupon applies only to items in "${cat}" category!`);
+            }
+            setAppliedCoupon({ code, type: 'category', value: val, category: cat });
+            toast.success(`🎉 ${val}% Discount applied on "${cat}" items!`);
+            setCouponCode("");
+            return;
+        }
+
+        return toast.error("Invalid coupon code! Try a valid scratch card coupon.");
+    };
+
+    const handleRemoveCoupon = () => {
+        setAppliedCoupon(null);
+        toast.success("Coupon removed!");
+    };
 
     // Dynamic Saved amount based on original product prices vs offer prices
     const itemsOriginalTotal = cartArray.reduce((acc, item) => {
@@ -99,12 +176,26 @@ const Cart = () => {
                 const { data } = await axios.post('/api/order/cod', {
                     userId: user._id,
                     items: cartArray.map(item => ({ product: item._id, quantity: item.quantity })),
-                    address: selectedAddress._id
+                    address: selectedAddress._id,
+                    discount: discountAmount
                 })
 
                 if (data.success) {
+                    // Deactivate used coupon in localStorage
+                    if (appliedCoupon) {
+                        const existing = JSON.parse(localStorage.getItem('kiranakart_unlocked_coupons') || '[]');
+                        const updated = existing.map(c => {
+                            if (c.code === appliedCoupon.code) {
+                                return { ...c, used: true };
+                            }
+                            return c;
+                        });
+                        localStorage.setItem('kiranakart_unlocked_coupons', JSON.stringify(updated));
+                    }
+
                     toast.success(data.message)
                     setCartItems([])
+                    setAppliedCoupon(null)
                     navigate('/my-orders')
                 } else {
                     toast.error(data.message)
@@ -115,6 +206,7 @@ const Cart = () => {
                     userId: user._id,
                     items: cartArray.map(item => ({ product: item._id, quantity: item.quantity })),
                     address: selectedAddress._id,
+                    discount: discountAmount,
                     // Pass dynamic calculations so the backend has realistic bills
                     extraCharges: {
                         delivery: deliveryCharge,
@@ -148,8 +240,21 @@ const Cart = () => {
                 status: status
             });
             if (data.success) {
+                // Deactivate used coupon in localStorage
+                if (appliedCoupon) {
+                    const existing = JSON.parse(localStorage.getItem('kiranakart_unlocked_coupons') || '[]');
+                    const updated = existing.map(c => {
+                        if (c.code === appliedCoupon.code) {
+                            return { ...c, used: true };
+                        }
+                        return c;
+                    });
+                    localStorage.setItem('kiranakart_unlocked_coupons', JSON.stringify(updated));
+                }
+
                 toast.success("Payment Received Successfully!");
                 setCartItems([]);
+                setAppliedCoupon(null);
                 navigate('/my-orders');
             } else {
                 toast.error("Payment Failed or Declined!");
@@ -256,7 +361,9 @@ const Cart = () => {
                                                 <h4 className="font-extrabold text-gray-800 text-sm leading-snug line-clamp-2 max-w-[240px] md:max-w-[340px]">
                                                     {product.name}
                                                 </h4>
-                                                <p className="text-[11px] font-bold text-gray-400 mt-0.5">{product.weight || "1 unit"}</p>
+                                                <p className="text-[11px] font-bold text-gray-400 mt-0.5">
+                                                    {product.quantityValue && product.unit ? `${product.quantityValue} ${product.unit}` : (product.weight || "1 unit")}
+                                                </p>
                                                 <div className="flex items-center gap-2 mt-1">
                                                     <span className="font-extrabold text-sm text-gray-900">{currency}{product.offerPrice}</span>
                                                     <span className="text-[11px] font-bold text-gray-400 line-through">{currency}{originalPrice}</span>
@@ -426,6 +533,71 @@ const Cart = () => {
                         </div>
                     </div>
 
+                    {/* Promo Code & Coupon section */}
+                    {getCartCount() > 0 && (
+                        <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 space-y-4">
+                            <span className="text-[11px] font-extrabold text-gray-400 uppercase tracking-wider block">Apply Promo Coupon</span>
+                            
+                            {/* Input Form */}
+                            <div className="flex gap-2">
+                                <input
+                                    type="text"
+                                    value={couponCode}
+                                    onChange={(e) => setCouponCode(e.target.value)}
+                                    placeholder="Enter code e.g. KIRANA25"
+                                    className="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2.5 text-xs outline-none focus:border-[#4F46E5] text-gray-800 font-bold uppercase"
+                                />
+                                <button
+                                    onClick={() => handleApplyCoupon()}
+                                    className="px-5 py-2.5 bg-[#4F46E5] hover:bg-[#4338CA] text-white rounded-xl font-bold text-xs shadow-sm transition active:scale-95 cursor-pointer shrink-0"
+                                >
+                                    Apply
+                                </button>
+                            </div>
+
+                            {/* Active Applied Coupon Alert Banner */}
+                            {appliedCoupon && (
+                                <div className="flex items-center justify-between p-3.5 bg-emerald-50 border border-emerald-100 rounded-xl text-emerald-800 animate-fadeIn">
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-base">🎉</span>
+                                        <div>
+                                            <div className="text-xs font-black uppercase tracking-wide">{appliedCoupon.code} Applied!</div>
+                                            <div className="text-[10px] font-bold text-emerald-600">Saved extra {currency}{discountAmount} on this order!</div>
+                                        </div>
+                                    </div>
+                                    <button
+                                        onClick={handleRemoveCoupon}
+                                        className="text-[11px] font-black text-rose-600 hover:text-rose-700 transition cursor-pointer select-none bg-rose-50 px-2 py-1 rounded-lg border border-rose-100"
+                                    >
+                                        Remove
+                                    </button>
+                                </div>
+                            )}
+
+                            {/* Tap list of unlocked coupons */}
+                            {unlockedCoupons.length > 0 && (
+                                <div className="space-y-2">
+                                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Your Unlocked Scratch Coupons:</span>
+                                    <div className="flex gap-2 overflow-x-auto pb-1 hide-scrollbar">
+                                        {unlockedCoupons.map((coupon, idx) => (
+                                            <button
+                                                key={idx}
+                                                onClick={() => handleApplyCoupon(coupon.code)}
+                                                className="shrink-0 bg-amber-50/70 hover:bg-amber-100/90 border border-dashed border-amber-300 text-amber-900 font-extrabold text-[10px] px-3.5 py-2 rounded-xl cursor-pointer transition flex items-center gap-1.5 shadow-xs"
+                                            >
+                                                <span>🎁</span>
+                                                <div className="flex flex-col items-start leading-none text-left">
+                                                    <span className="font-black text-amber-950 uppercase tracking-wider">{coupon.code}</span>
+                                                    <span className="text-[8px] text-amber-700 font-bold mt-0.5">{coupon.type === 'flat' ? `Flat ₹${coupon.value} Off` : `${coupon.value}% Category Off`}</span>
+                                                </div>
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    )}
+
                     {/* Bill Details Box */}
                     <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
                         <h3 className="font-black text-gray-900 text-base">Bill details</h3>
@@ -450,6 +622,16 @@ const Cart = () => {
                                     <span className="text-gray-800 font-black">{currency}{itemsTotal}</span>
                                 </div>
                             </div>
+
+                            {appliedCoupon && discountAmount > 0 && (
+                                <div className="flex justify-between items-center text-emerald-600">
+                                    <div className="flex items-center gap-1.5">
+                                        <span>🎁</span>
+                                        <span>Coupon discount ({appliedCoupon.code})</span>
+                                    </div>
+                                    <span className="font-black">-{currency}{discountAmount}</span>
+                                </div>
+                            )}
 
                             {getCartCount() > 0 && (
                                 <>

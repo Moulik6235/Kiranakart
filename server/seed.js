@@ -25,7 +25,7 @@ const productsToSeed = [
         price: 49,
         offerPrice: 39,
         image: ["https://images.unsplash.com/photo-1595855759920-86582396756a?w=600&auto=format&fit=crop&q=80"],
-        category: "Vegetables",
+        category: "Fruits & Vegetables",
         inStock: true
     },
     {
@@ -39,7 +39,7 @@ const productsToSeed = [
         price: 35,
         offerPrice: 29,
         image: ["https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=600&auto=format&fit=crop&q=80"],
-        category: "Vegetables",
+        category: "Fruits & Vegetables",
         inStock: true
     },
     {
@@ -53,7 +53,7 @@ const productsToSeed = [
         price: 45,
         offerPrice: 35,
         image: ["https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=600&auto=format&fit=crop&q=80"],
-        category: "Vegetables",
+        category: "Fruits & Vegetables",
         inStock: true
     },
     {
@@ -67,7 +67,7 @@ const productsToSeed = [
         price: 80,
         offerPrice: 65,
         image: ["https://images.unsplash.com/photo-1584270354949-c26b0d5b4a0c?w=600&auto=format&fit=crop&q=80"],
-        category: "Vegetables",
+        category: "Fruits & Vegetables",
         inStock: true
     },
 
@@ -83,7 +83,7 @@ const productsToSeed = [
         price: 180,
         offerPrice: 159,
         image: ["https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=600&auto=format&fit=crop&q=80"],
-        category: "Fruits",
+        category: "Fruits & Vegetables",
         inStock: true
     },
     {
@@ -97,7 +97,7 @@ const productsToSeed = [
         price: 70,
         offerPrice: 59,
         image: ["https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=600&auto=format&fit=crop&q=80"],
-        category: "Fruits",
+        category: "Fruits & Vegetables",
         inStock: true
     },
     {
@@ -111,7 +111,7 @@ const productsToSeed = [
         price: 150,
         offerPrice: 129,
         image: ["https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=600&auto=format&fit=crop&q=80"],
-        category: "Fruits",
+        category: "Fruits & Vegetables",
         inStock: true
     },
     {
@@ -125,7 +125,7 @@ const productsToSeed = [
         price: 220,
         offerPrice: 189,
         image: ["https://images.unsplash.com/photo-1498557850523-fd3d118b962e?w=600&auto=format&fit=crop&q=80"],
-        category: "Fruits",
+        category: "Fruits & Vegetables",
         inStock: true
     },
 
@@ -141,7 +141,7 @@ const productsToSeed = [
         price: 120,
         offerPrice: 99,
         image: ["https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=600&auto=format&fit=crop&q=80"],
-        category: "Drinks",
+        category: "Cold Drinks & Juices",
         inStock: true
     },
     {
@@ -155,7 +155,7 @@ const productsToSeed = [
         price: 90,
         offerPrice: 75,
         image: ["https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=600&auto=format&fit=crop&q=80"],
-        category: "Drinks",
+        category: "Cold Drinks & Juices",
         inStock: true
     },
     {
@@ -169,7 +169,7 @@ const productsToSeed = [
         price: 75,
         offerPrice: 65,
         image: ["https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=600&auto=format&fit=crop&q=80"],
-        category: "Drinks",
+        category: "Cold Drinks & Juices",
         inStock: true
     },
     {
@@ -183,7 +183,7 @@ const productsToSeed = [
         price: 50,
         offerPrice: 42,
         image: ["https://images.unsplash.com/photo-1626263597114-11883b27670a?w=600&auto=format&fit=crop&q=80"],
-        category: "Drinks",
+        category: "Cold Drinks & Juices",
         inStock: true
     },
 
@@ -199,7 +199,7 @@ const productsToSeed = [
         price: 110,
         offerPrice: 95,
         image: ["https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&auto=format&fit=crop&q=80"],
-        category: "Instant",
+        category: "Breakfast & Instant Food",
         inStock: true
     },
     {
@@ -213,7 +213,7 @@ const productsToSeed = [
         price: 90,
         offerPrice: 75,
         image: ["https://images.unsplash.com/photo-1547592165-e1d17fed6005?w=600&auto=format&fit=crop&q=80"],
-        category: "Instant",
+        category: "Breakfast & Instant Food",
         inStock: true
     },
     {
@@ -227,7 +227,7 @@ const productsToSeed = [
         price: 85,
         offerPrice: 69,
         image: ["https://images.unsplash.com/photo-1608897013039-887f21d8c804?w=600&auto=format&fit=crop&q=80"],
-        category: "Instant",
+        category: "Breakfast & Instant Food",
         inStock: true
     },
     {
@@ -241,7 +241,7 @@ const productsToSeed = [
         price: 60,
         offerPrice: 49,
         image: ["https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=600&auto=format&fit=crop&q=80"],
-        category: "Instant",
+        category: "Breakfast & Instant Food",
         inStock: true
     },
 
@@ -257,7 +257,7 @@ const productsToSeed = [
         price: 75,
         offerPrice: 65,
         image: ["https://images.unsplash.com/photo-1550583724-b2692b85b150?w=600&auto=format&fit=crop&q=80"],
-        category: "Dairy",
+        category: "Dairy, Bread & Eggs",
         inStock: true
     },
     {
@@ -271,7 +271,7 @@ const productsToSeed = [
         price: 110,
         offerPrice: 95,
         image: ["https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?w=600&auto=format&fit=crop&q=80"],
-        category: "Dairy",
+        category: "Dairy, Bread & Eggs",
         inStock: true
     },
     {
@@ -285,7 +285,7 @@ const productsToSeed = [
         price: 140,
         offerPrice: 119,
         image: ["https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&auto=format&fit=crop&q=80"],
-        category: "Dairy",
+        category: "Dairy, Bread & Eggs",
         inStock: true
     },
     {
@@ -299,7 +299,7 @@ const productsToSeed = [
         price: 199,
         offerPrice: 175,
         image: ["https://images.unsplash.com/photo-1618067330799-a472c73f7171?w=600&auto=format&fit=crop&q=80"],
-        category: "Dairy",
+        category: "Dairy, Bread & Eggs",
         inStock: true
     },
     {
@@ -313,7 +313,7 @@ const productsToSeed = [
         price: 120,
         offerPrice: 99,
         image: ["https://images.unsplash.com/photo-1506976785307-8732e854ad03?w=600&auto=format&fit=crop&q=80"],
-        category: "Dairy",
+        category: "Dairy, Bread & Eggs",
         inStock: true
     },
 
@@ -329,7 +329,7 @@ const productsToSeed = [
         price: 90,
         offerPrice: 75,
         image: ["https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&auto=format&fit=crop&q=80"],
-        category: "Bakery",
+        category: "Bakery & Biscuits",
         inStock: true
     },
     {
@@ -343,7 +343,7 @@ const productsToSeed = [
         price: 160,
         offerPrice: 139,
         image: ["https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&auto=format&fit=crop&q=80"],
-        category: "Bakery",
+        category: "Bakery & Biscuits",
         inStock: true
     },
     {
@@ -357,7 +357,7 @@ const productsToSeed = [
         price: 130,
         offerPrice: 109,
         image: ["https://images.unsplash.com/photo-1607958996333-41aef7caefaa?w=600&auto=format&fit=crop&q=80"],
-        category: "Bakery",
+        category: "Bakery & Biscuits",
         inStock: true
     },
     {
@@ -371,7 +371,7 @@ const productsToSeed = [
         price: 95,
         offerPrice: 79,
         image: ["https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=600&auto=format&fit=crop&q=80"],
-        category: "Bakery",
+        category: "Bakery & Biscuits",
         inStock: true
     },
 
@@ -387,7 +387,7 @@ const productsToSeed = [
         price: 650,
         offerPrice: 580,
         image: ["https://images.unsplash.com/photo-1586201375761-83865001e31c?w=600&auto=format&fit=crop&q=80"],
-        category: "Grains",
+        category: "Atta, Rice & Dal",
         inStock: true
     },
     {
@@ -401,7 +401,7 @@ const productsToSeed = [
         price: 250,
         offerPrice: 199,
         image: ["https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=600&auto=format&fit=crop&q=80"],
-        category: "Grains",
+        category: "Atta, Rice & Dal",
         inStock: true
     },
     {
@@ -415,7 +415,7 @@ const productsToSeed = [
         price: 140,
         offerPrice: 119,
         image: ["https://images.unsplash.com/photo-1515942400420-2b98fed1f515?w=600&auto=format&fit=crop&q=80"],
-        category: "Grains",
+        category: "Atta, Rice & Dal",
     },
     {
         name: "Premium Hass Avocados 2pcs",
@@ -428,7 +428,7 @@ const productsToSeed = [
         price: 299,
         offerPrice: 199,
         image: ["https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=600&auto=format&fit=crop&q=80"],
-        category: "Fruits",
+        category: "Fruits & Vegetables",
         inStock: true,
         isDeal: true,
         dealBadge: "Save 33%",
@@ -445,7 +445,7 @@ const productsToSeed = [
         price: 250,
         offerPrice: 179,
         image: ["https://images.unsplash.com/photo-1553279768-865429fa0078?w=600&auto=format&fit=crop&q=80"],
-        category: "Fruits",
+        category: "Fruits & Vegetables",
         inStock: true,
         isDeal: true,
         dealBadge: "Bestseller Deal",

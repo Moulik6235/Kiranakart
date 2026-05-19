@@ -7,8 +7,9 @@ import ProductCard from '../components/ProductCard'
 const ProductCategory = () => {
   const { products } = useAppContext()
   const { category } = useParams()
-  const searchCategory = categories.find((item) => item.path.toLowerCase() === category)
-  const filteredProducts = products.filter((product) => product.category.toLowerCase() === category)
+  const decodedCategory = decodeURIComponent(category || "").toLowerCase()
+  const searchCategory = categories.find((item) => item.path.toLowerCase() === decodedCategory)
+  const filteredProducts = products.filter((product) => product.category.toLowerCase() === decodedCategory)
 
 
   return (
