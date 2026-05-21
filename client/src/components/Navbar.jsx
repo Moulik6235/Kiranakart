@@ -26,9 +26,7 @@ const Navbar = () => {
         isSeller,
         setIsSeller,
         showHelpModal,
-        setShowHelpModal,
-        darkMode,
-        setDarkMode
+        setShowHelpModal
     } = useAppContext();
 
     const [showLocationModal, setShowLocationModal] = useState(false);
@@ -178,7 +176,7 @@ const Navbar = () => {
     return (
         <div className="w-full sticky top-0 z-50 bg-white border-b border-gray-100 shadow-[0_4px_12px_rgba(0,0,0,0.03)] transition-all">
             {/* Top Main Navbar Row */}
-            <div className="flex items-center justify-between px-4 md:px-12 lg:px-24 py-3 gap-4">
+            <div className="hidden sm:flex items-center justify-between px-4 md:px-12 lg:px-24 py-3 gap-4">
                 
                 {/* Brand Logo & Address */}
                 <div className="flex items-center">
@@ -320,22 +318,6 @@ const Navbar = () => {
                         </div>
                     </div>
 
-                    {/* Seamless Neon Dark Mode Toggle */}
-                    <button
-                        onClick={() => setDarkMode(!darkMode)}
-                        className="p-2.5 bg-gray-50 dark:bg-slate-800 text-gray-700 dark:text-yellow-400 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-150 dark:border-slate-700 rounded-xl transition duration-200 cursor-pointer shadow-3xs flex items-center justify-center shrink-0"
-                        title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
-                    >
-                        {darkMode ? (
-                            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-amber-400" viewBox="0 0 20 20" fill="currentColor">
-                                <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
-                            </svg>
-                        ) : (
-                            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-indigo-600" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-                            </svg>
-                        )}
-                    </button>
 
                     <button 
                         onClick={() => {
@@ -372,23 +354,85 @@ const Navbar = () => {
                 </div>
             </div>
 
-            {/* Mobile/Tablet Search Bar row (visible below navbar on small screens) */}
-            <div className="px-4 pb-3 lg:hidden relative">
-                <div className="w-full flex items-center gap-3 bg-[#F8F8F8] border border-gray-100 px-4 py-2.5 rounded-xl focus-within:border-gray-300 focus-within:bg-white transition duration-200">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                    <input 
-                        value={searchQueryValue}
-                        onChange={(e) => setSearchQueryValue(e.target.value)} 
-                        onFocus={() => setSearchFocused(true)}
-                        onBlur={() => setTimeout(() => setSearchFocused(false), 200)}
-                        className="w-full bg-transparent outline-none text-sm text-gray-800 placeholder-gray-400 font-medium" 
-                        type="text" 
-                        placeholder={placeholders[placeholderIdx]} 
-                    />
+            {/* 2. Premium Blinkit-Style Mobile Quick-Commerce Header Row (Visible ONLY on mobile) */}
+            <div className="block sm:hidden bg-white px-4 pt-4 pb-4 border-b border-gray-100 relative select-none">
+                
+                {/* Row 1: Brand details (Blinkit-style) and Quick Actions */}
+                <div className="flex items-start justify-between w-full">
+                    
+                    {/* Brand in Delivery Duration */}
+                    <div className="flex flex-col text-left">
+                        <span className="text-xs font-black text-slate-800 tracking-tight leading-none uppercase">
+                            KiranaKart in
+                        </span>
+                        <span className="text-[34px] font-black text-slate-900 tracking-tighter leading-none mt-1 animate-pulse">
+                            {deliveryTime} minutes
+                        </span>
+                        
+                        {/* Interactive address dropdown selector */}
+                        <div 
+                            onClick={() => user ? setShowLocationModal(true) : setShowUserLogin(true)}
+                            className="flex items-center gap-1.5 text-xs font-black text-slate-850 hover:text-slate-950 mt-2.5 cursor-pointer select-none leading-none"
+                        >
+                            <span className="max-w-[210px] truncate">
+                                {selectedAddress 
+                                    ? `${(selectedAddress.category || 'HOME').toUpperCase()} - ${selectedAddress.street}` 
+                                    : "HOME - LIG Housing Board Colony, Ch..."}
+                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5 text-slate-805 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    {/* Right Side Widgets: Wallet Balance & Profile Dropdown */}
+                    <div className="flex items-center gap-2">
+                        
+                        {/* 1. Wallet Balance Badge Pill (Click goes to checkout/cart) */}
+                        <div 
+                            onClick={() => user ? navigate("/cart") : setShowUserLogin(true)}
+                            className="flex flex-col items-center justify-center bg-white border border-slate-200 rounded-full w-12 h-12 shadow-sm relative cursor-pointer active:scale-95 transition"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                            </svg>
+                            <div className="absolute -bottom-1.5 bg-white border border-slate-200 px-2 py-0.5 rounded-full shadow-2xs">
+                                <span className="text-[9px] font-black text-slate-800 tracking-tight">
+                                    {currency}{getCartAmount()}
+                                </span>
+                            </div>
+                        </div>
+
+                        {/* 2. White Rounded Profile / Settings Silhouette Button */}
+                        <div 
+                            onClick={() => setOpen(!open)}
+                            className="w-12 h-12 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm cursor-pointer active:scale-95 transition"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-slate-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                        </div>
+                    </div>
                 </div>
-                {renderAutocompleteDropdown()}
+
+                {/* Row 2: Visual Search Box (Blinkit-style) */}
+                <div className="relative mt-3.5">
+                    <div className="w-full flex items-center gap-3 bg-white border border-slate-200 shadow-sm focus-within:border-indigo-400 px-4 py-2.5 rounded-2xl transition duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                        <input 
+                            value={searchQueryValue}
+                            onChange={(e) => setSearchQueryValue(e.target.value)} 
+                            onFocus={() => setSearchFocused(true)}
+                            onBlur={() => setTimeout(() => setSearchFocused(false), 200)}
+                            className="w-full bg-transparent outline-none text-sm text-slate-800 placeholder-slate-450 font-bold" 
+                            type="text" 
+                            placeholder={placeholders[placeholderIdx]} 
+                        />
+                    </div>
+                    {renderAutocompleteDropdown()}
+                </div>
             </div>
 
             {/* Responsive Side Drawer / Menu Mobile */}

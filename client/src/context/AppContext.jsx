@@ -24,19 +24,7 @@ export const AppContextProvider = ({ children }) => {
     const [selectedAddress, setSelectedAddress] = useState(null)
     const [deliveryTime, setDeliveryTime] = useState(23)
     const [showHelpModal, setShowHelpModal] = useState(false)
-    const [darkMode, setDarkMode] = useState(() => {
-        return localStorage.getItem('darkMode') === 'true';
-    });
 
-    useEffect(() => {
-        if (darkMode) {
-            document.documentElement.classList.add('dark');
-            localStorage.setItem('darkMode', 'true');
-        } else {
-            document.documentElement.classList.remove('dark');
-            localStorage.setItem('darkMode', 'false');
-        }
-    }, [darkMode]);
 
     const getUserAddress = async () => {
         try {
@@ -199,7 +187,7 @@ export const AppContextProvider = ({ children }) => {
     }
 
 
-    const value = { navigate, user, setUser, setIsSeller, isSeller, showUserLogin, setShowUserLogin, products, currency, addToCart, updateCartItem, removeFromCart, deleteFromCart, cartItems, searchQuery, setSearchQuery, getCartAmount, getCartCount, axios, fetchProducts , setCartItems, addresses, setAddresses, selectedAddress, setSelectedAddress, deliveryTime, setDeliveryTime, getUserAddress, showHelpModal, setShowHelpModal, darkMode, setDarkMode}
+    const value = { navigate, user, setUser, setIsSeller, isSeller, showUserLogin, setShowUserLogin, products, currency, addToCart, updateCartItem, removeFromCart, deleteFromCart, cartItems, searchQuery, setSearchQuery, getCartAmount, getCartCount, axios, fetchProducts , setCartItems, addresses, setAddresses, selectedAddress, setSelectedAddress, deliveryTime, setDeliveryTime, getUserAddress, showHelpModal, setShowHelpModal}
     return <AppContext.Provider value={value}>
         {children}
     </AppContext.Provider>

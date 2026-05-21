@@ -758,7 +758,7 @@ const MyOrders = () => {
                     {/* Active Phone number displaying top-left panel */}
                     <div className="text-center py-6 border-b border-gray-150 flex items-center justify-center h-20 shrink-0">
                         <p className="text-sm font-bold text-gray-700 tracking-wider">
-                            {user?.phone || "+917986312767"}
+                            {user?.phone || "+91 99999 99999"}
                         </p>
                     </div>
 

@@ -814,15 +814,15 @@ const Cart = () => {
                             
                             {paymentMethodTab === "upi" ? (
                                 <>
-                                    {/* Real UPI QR Code */}
+                                    {/* Dynamic Mock UPI QR Code for privacy & security */}
                                     <div className="my-6 mx-auto flex flex-col items-center justify-center animate-fadeIn">
                                         <img 
-                                            src="/images/upi_qr_code.jpg" 
-                                            alt="Scan to Pay - MOULIK MANOCHA (7986312767@yapl)" 
+                                            src={`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(`upi://pay?pa=merchant@kiranakart&pn=KiranaKart%20Store&am=${mockOrderDetails?.amount || 0}&cu=INR`)}`}
+                                            alt="Scan to Pay Mock QR Code" 
                                             className="w-56 h-auto object-contain rounded-2xl shadow-lg border border-gray-100"
                                         />
                                     </div>
-                                    <p className="text-xs font-bold text-gray-400 mb-6">Scan QR using GPay, PhonePe, Paytm, or BHIM · <span className="text-gray-600">7986312767@yapl</span></p>
+                                    <p className="text-xs font-bold text-gray-400 mb-6">Scan mock QR using GPay, PhonePe, or Paytm · <span className="text-gray-600">merchant@kiranakart</span></p>
                                     
                                     {/* Simulation actions */}
                                     <div className="space-y-3">
