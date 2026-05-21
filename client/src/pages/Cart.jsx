@@ -43,6 +43,7 @@ const Cart = () => {
     // Store Settings (seller-controlled charges)
     const [storeSettings, setStoreSettings] = useState({
         deliveryEnabled: true, deliveryCharge: 30, deliveryLabel: 'Delivery charge',
+        freeDeliveryEnabled: false, freeDeliveryThreshold: 199,
         surgeEnabled: true, surgeCharge: 30, surgeLabel: 'Surge charge'
     })
 
@@ -74,7 +75,13 @@ const Cart = () => {
 
     // Math calculations
     const itemsTotal = getCartAmount()
-    const deliveryCharge = storeSettings.deliveryEnabled && getCartCount() > 0 ? storeSettings.deliveryCharge : 0
+    
+    // Check if free delivery is manually enabled by seller and cart is above threshold
+    const isFreeDeliveryEligible = storeSettings.freeDeliveryEnabled && itemsTotal >= storeSettings.freeDeliveryThreshold;
+    
+    const deliveryCharge = storeSettings.deliveryEnabled && getCartCount() > 0 
+        ? (isFreeDeliveryEligible ? 0 : storeSettings.deliveryCharge) 
+        : 0
     const handlingCharge = 0
     const surgeCharge = storeSettings.surgeEnabled && getCartCount() > 0 ? storeSettings.surgeCharge : 0
     const donationAmount = 0
@@ -400,6 +407,38 @@ const Cart = () => {
                         )}
                     </div>
 
+                    {/* Free Delivery Goal Tracker */}
+                    {getCartCount() > 0 && storeSettings.freeDeliveryEnabled && (
+                        <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 space-y-3 text-left">
+                            {isFreeDeliveryEligible ? (
+                                <div className="flex items-center gap-3 text-emerald-800 animate-fadeIn">
+                                    <div className="w-8 h-8 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center shrink-0">🎉</div>
+                                    <div>
+                                        <h4 className="font-extrabold text-xs">Free Delivery Unlocked!</h4>
+                                        <p className="text-[10px] text-emerald-600 font-semibold mt-0.5">Your cart is above ₹{storeSettings.freeDeliveryThreshold}. You saved ₹{storeSettings.deliveryCharge}!</p>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="space-y-2">
+                                    <div className="flex justify-between items-center text-xs">
+                                        <span className="font-bold text-gray-700">
+                                            Add <span className="font-black text-indigo-600">₹{storeSettings.freeDeliveryThreshold - itemsTotal}</span> more for <span className="font-black text-emerald-600">FREE Delivery</span>
+                                        </span>
+                                        <span className="text-[10px] font-black text-gray-400">
+                                            {Math.round((itemsTotal / storeSettings.freeDeliveryThreshold) * 100)}%
+                                        </span>
+                                    </div>
+                                    <div className="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
+                                        <div 
+                                            className="bg-emerald-500 h-full rounded-full transition-all duration-500"
+                                            style={{ width: `${Math.min(100, Math.round((itemsTotal / storeSettings.freeDeliveryThreshold) * 100))}%` }}
+                                        />
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    )}
+
 
                     {/* Tip delivery partner */}
                     {getCartCount() > 0 && (
@@ -642,7 +681,16 @@ const Cart = () => {
                                                 <span>{storeSettings.deliveryLabel || 'Delivery charge'}</span>
                                                 <span className="text-[10px] text-gray-400 cursor-pointer select-none">ⓘ</span>
                                             </div>
-                                            <span className="text-gray-800 font-black">{currency}{storeSettings.deliveryCharge}</span>
+                                            <span className="text-gray-800 font-black">
+                                                {isFreeDeliveryEligible ? (
+                                                    <>
+                                                        <span className="text-gray-400 line-through mr-1.5 font-bold">{currency}{storeSettings.deliveryCharge}</span>
+                                                        <span className="text-emerald-600 uppercase text-xs font-black">FREE</span>
+                                                    </>
+                                                ) : (
+                                                    `${currency}${storeSettings.deliveryCharge}`
+                                                )}
+                                            </span>
                                         </div>
                                     )}
                                     {storeSettings.surgeEnabled && (

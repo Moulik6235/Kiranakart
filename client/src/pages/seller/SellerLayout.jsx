@@ -38,8 +38,18 @@ const SellerLayout = () => {
                     <img src={assets.logo} alt="logo" className="cursor-pointer w-34 md:w-38" />
                 </Link>
                 <div className="flex items-center gap-5 text-gray-500">
-                    <p>Hi! Admin</p>
-                    <button onClick={logout} className='border rounded-full text-sm px-4 py-1 cursor-pointer'>Logout</button>
+                    <p className="font-semibold text-slate-800">Hi! Admin</p>
+                    <button 
+                        onClick={() => {
+                            setIsSeller(false);
+                            navigate('/');
+                        }} 
+                        className="flex items-center gap-1.5 px-3.5 py-1.5 bg-[#4F46E5]/10 hover:bg-[#4F46E5]/20 text-[#4F46E5] text-xs font-black rounded-lg transition active:scale-95 cursor-pointer shadow-3xs"
+                    >
+                        <span>🛍️</span>
+                        <span>Customer View</span>
+                    </button>
+                    <button onClick={logout} className='border rounded-full text-sm px-4 py-1 cursor-pointer hover:bg-slate-50 transition'>Logout</button>
                 </div>
             </div>
             <div className="flex">

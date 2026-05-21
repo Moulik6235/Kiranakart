@@ -262,7 +262,7 @@ const Rewards = () => {
                 <div className="absolute left-1/3 bottom-0 w-24 h-24 bg-white/5 rounded-full -mb-10 pointer-events-none"></div>
 
                 <div className="space-y-2 text-center md:text-left z-10">
-                    <span className="text-xs font-black uppercase bg-indigo-500/50 px-3 py-1 rounded-full tracking-wider">Google Pay Style Rewards</span>
+                    <span className="text-xs font-black uppercase bg-indigo-500/50 px-3 py-1 rounded-full tracking-wider">Rewards</span>
                     <h2 className="text-2xl md:text-3xl font-black tracking-tight mt-1">Scratch Cards & Rewards</h2>
                     <p className="text-[11px] md:text-xs text-indigo-100 font-bold max-w-md">
                         Earn interactive scratch cards with every successful delivery! Scratched cashback is added instantly to your wallet.

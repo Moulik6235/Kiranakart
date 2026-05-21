@@ -39,6 +39,14 @@ const SellerLogin = () => {
     return !isSeller && (
         <div className="min-h-screen flex items-center justify-center p-4 bg-slate-50 transition-opacity duration-300">
             <div className={`relative w-full max-w-md overflow-hidden rounded-3xl bg-white border border-slate-100 shadow-[0_20px_50px_rgba(79,70,229,0.15)] p-8 transition-all duration-500 transform ${animateIn ? 'scale-100 translate-y-0 opacity-100' : 'scale-95 translate-y-4 opacity-0'}`}>
+                {/* Close Button to return to store */}
+                <button 
+                    onClick={() => navigate('/')} 
+                    className="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-50 hover:bg-slate-105 border border-slate-150 text-slate-400 hover:text-slate-600 flex items-center justify-center transition duration-200 cursor-pointer z-50 font-bold"
+                    aria-label="Back to store"
+                >
+                    ✕
+                </button>
                 
                 {/* Background soft glowing orb */}
                 <div className="absolute -top-24 -left-24 w-48 h-48 rounded-full bg-indigo-500/10 blur-3xl"></div>
@@ -72,7 +80,7 @@ const SellerLogin = () => {
                                 className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 rounded-2xl pl-11 pr-4 py-3.5 outline-none text-slate-800 font-medium transition duration-200" 
                                 type="email" 
                                 required 
-                            />
+                             />
                         </div>
                     </div>
 
@@ -130,6 +138,15 @@ const SellerLogin = () => {
                         )}
                     </button>
                 </form>
+
+                <div className="mt-6 text-center relative z-10 border-t border-slate-100 pt-4">
+                    <button 
+                        onClick={() => navigate('/')}
+                        className="text-xs font-black text-indigo-600 hover:text-indigo-800 transition duration-200 cursor-pointer flex items-center justify-center gap-1 mx-auto"
+                    >
+                        ← Back to Customer Store
+                    </button>
+                </div>
             </div>
         </div>
     )

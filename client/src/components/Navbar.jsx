@@ -52,6 +52,89 @@ const Navbar = () => {
         typeof searchQuery === 'string' ? searchQuery : ''
     );
 
+    const { products, addToCart } = useAppContext();
+    const [searchFocused, setSearchFocused] = useState(false);
+
+    const filteredProducts = searchQueryValue 
+        ? products.filter(p => p.name.toLowerCase().includes(searchQueryValue.toLowerCase())).slice(0, 5)
+        : [];
+
+    const renderAutocompleteDropdown = () => {
+        if (!searchFocused) return null;
+        return (
+            <div className="absolute left-0 right-0 top-full mt-2 bg-white border border-gray-200 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] z-[999] overflow-hidden max-h-96 flex flex-col">
+                {searchQueryValue.trim() ? (
+                    <div className="p-2 flex flex-col gap-1">
+                        <div className="px-3 py-1.5 text-[10px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-50 text-left">
+                            Matching items
+                        </div>
+                        {filteredProducts.length > 0 ? (
+                            filteredProducts.map((p) => (
+                                <div 
+                                    key={p._id} 
+                                    onMouseDown={(e) => {
+                                        e.preventDefault();
+                                        navigate(`/product/${p._id}`);
+                                        setSearchFocused(false);
+                                    }}
+                                    className="flex items-center justify-between p-2 hover:bg-slate-50 rounded-xl transition duration-150 cursor-pointer group"
+                                >
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-10 h-10 bg-slate-50 border border-slate-100 rounded-lg p-1 flex items-center justify-center shrink-0">
+                                            <img src={p.image[0]} alt={p.name} className="w-full h-full object-contain" />
+                                        </div>
+                                        <div className="text-left">
+                                            <p className="text-xs font-bold text-gray-800 leading-snug group-hover:text-[#4F46E5] transition-colors">{p.name}</p>
+                                            <p className="text-[10px] text-gray-400 font-semibold">{p.category}</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-3">
+                                        <span className="text-xs font-black text-slate-800">{currency}{p.offerPrice}</span>
+                                        <button 
+                                            onMouseDown={(e) => {
+                                                e.preventDefault();
+                                                e.stopPropagation();
+                                                addToCart(p._id);
+                                            }}
+                                            className="px-2.5 py-1 bg-emerald-50 hover:bg-emerald-600 hover:text-white border border-emerald-100 hover:border-emerald-600 text-emerald-600 text-[10px] font-black rounded-lg transition active:scale-95 cursor-pointer shadow-xs"
+                                        >
+                                            + Add
+                                        </button>
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <div className="py-6 text-center text-xs font-bold text-gray-400">
+                                🔍 No items matching "{searchQueryValue}"
+                            </div>
+                        )}
+                    </div>
+                ) : (
+                    <div className="p-3 flex flex-col gap-2">
+                        <div className="text-[10px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-50 pb-1.5 text-left">
+                            Popular Searches
+                        </div>
+                        <div className="flex flex-wrap gap-2 pt-1 text-left">
+                            {["Chips", "Milk", "Bread", "Eggs", "Apples", "Butter"].map((sug) => (
+                                <button 
+                                    key={sug}
+                                    onMouseDown={(e) => {
+                                        e.preventDefault();
+                                        setSearchQueryValue(sug);
+                                        setSearchFocused(true);
+                                    }}
+                                    className="px-3 py-1.5 bg-slate-50 hover:bg-[#4F46E5]/10 border border-slate-200 hover:border-[#4F46E5] hover:text-[#4F46E5] text-xs font-bold text-gray-600 rounded-full transition duration-150 cursor-pointer"
+                                >
+                                    {sug}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                )}
+            </div>
+        );
+    };
+
     useEffect(() => {
         const interval = setInterval(() => {
             setPlaceholderIdx((prev) => (prev + 1) % placeholders.length);
@@ -131,17 +214,20 @@ const Navbar = () => {
                 </div>
 
                 {/* Desktop Search Bar (Centered, visible on large screens) */}
-                <div className="flex-1 max-w-xl hidden lg:flex items-center gap-3 bg-[#F8F8F8] border border-gray-100 px-4 py-2.5 rounded-xl focus-within:border-gray-300 focus-within:bg-white focus-within:shadow-[0_2px_8px_rgba(0,0,0,0.02)] transition duration-200">
+                <div className="relative flex-1 max-w-xl hidden lg:flex items-center gap-3 bg-[#F8F8F8] border border-gray-100 px-4 py-2.5 rounded-xl focus-within:border-gray-300 focus-within:bg-white focus-within:shadow-[0_2px_8px_rgba(0,0,0,0.02)] transition duration-200">
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                     <input 
                         value={searchQueryValue}
                         onChange={(e) => setSearchQueryValue(e.target.value)} 
+                        onFocus={() => setSearchFocused(true)}
+                        onBlur={() => setTimeout(() => setSearchFocused(false), 200)}
                         className="w-full bg-transparent outline-none text-sm text-gray-800 placeholder-gray-400 font-medium" 
                         type="text" 
                         placeholder={placeholders[placeholderIdx]} 
                     />
+                    {renderAutocompleteDropdown()}
                 </div>
 
                 {/* Right Side Actions */}
@@ -188,7 +274,7 @@ const Navbar = () => {
                                         onClick={goToSeller} 
                                         className="w-full text-left px-4 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:text-[#4F46E5] transition duration-150 cursor-pointer"
                                     >
-                                        Seller Account
+                                        {isSeller ? "Seller Dashboard" : "Seller Account"}
                                     </button>
                                     <button 
                                         onClick={() => setShowHelpModal(true)} 
@@ -218,7 +304,7 @@ const Navbar = () => {
                                         onClick={goToSeller} 
                                         className="w-full text-left px-4 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:text-[#4F46E5] transition duration-150 cursor-pointer border-t border-gray-50"
                                     >
-                                        Seller Account
+                                        {isSeller ? "Seller Dashboard" : "Seller Account"}
                                     </button>
                                     <button 
                                         onClick={() => setShowHelpModal(true)} 
@@ -287,7 +373,7 @@ const Navbar = () => {
             </div>
 
             {/* Mobile/Tablet Search Bar row (visible below navbar on small screens) */}
-            <div className="px-4 pb-3 lg:hidden">
+            <div className="px-4 pb-3 lg:hidden relative">
                 <div className="w-full flex items-center gap-3 bg-[#F8F8F8] border border-gray-100 px-4 py-2.5 rounded-xl focus-within:border-gray-300 focus-within:bg-white transition duration-200">
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -295,11 +381,14 @@ const Navbar = () => {
                     <input 
                         value={searchQueryValue}
                         onChange={(e) => setSearchQueryValue(e.target.value)} 
+                        onFocus={() => setSearchFocused(true)}
+                        onBlur={() => setTimeout(() => setSearchFocused(false), 200)}
                         className="w-full bg-transparent outline-none text-sm text-gray-800 placeholder-gray-400 font-medium" 
                         type="text" 
                         placeholder={placeholders[placeholderIdx]} 
                     />
                 </div>
+                {renderAutocompleteDropdown()}
             </div>
 
             {/* Responsive Side Drawer / Menu Mobile */}
@@ -329,7 +418,7 @@ const Navbar = () => {
                     <NavLink className="text-gray-700 font-bold w-full border-b border-gray-50 pb-2 hover:text-[#4F46E5] transition" to='/products' onClick={() => setOpen(false)} >All Products</NavLink>
                     <NavLink className="text-gray-700 font-bold w-full border-b border-gray-50 pb-2 hover:text-[#4F46E5] transition" to='/contact' onClick={() => setOpen(false)} >Contact Us</NavLink>
                     
-                    {user ? (
+                    {user && (
                         <>
                             <NavLink className="text-gray-700 font-bold w-full border-b border-gray-50 pb-2 hover:text-[#4F46E5] transition" to='/my-orders' onClick={() => setOpen(false)} >My Orders</NavLink>
                             <button className="text-gray-700 font-bold w-full border-b border-gray-50 pb-2 hover:text-[#4F46E5] transition text-left cursor-pointer flex items-center gap-2" onClick={() => { setOpen(false); setShowHelpModal(true); }} >
@@ -338,17 +427,7 @@ const Navbar = () => {
                                 </svg>
                                 Help & Support
                             </button>
-                            <button className="text-gray-700 font-bold w-full border-b border-gray-50 pb-2 hover:text-[#4F46E5] transition text-left cursor-pointer" onClick={() => { setOpen(false); goToSeller(); }} >Seller Account</button>
-                        </>
-                    ) : (
-                        <>
-                            <button className="text-gray-700 font-bold w-full border-b border-gray-50 pb-2 hover:text-[#4F46E5] transition text-left cursor-pointer flex items-center gap-2" onClick={() => { setOpen(false); setShowHelpModal(true); }} >
-                                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-gray-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                Help & Support
-                            </button>
-                            <button className="text-gray-700 font-bold w-full border-b border-gray-50 pb-2 hover:text-[#4F46E5] transition text-left cursor-pointer" onClick={() => { setOpen(false); goToSeller(); }} >Seller Account</button>
+                            <button className="text-gray-700 font-bold w-full border-b border-gray-50 pb-2 hover:text-[#4F46E5] transition text-left cursor-pointer" onClick={() => { setOpen(false); goToSeller(); }} >{isSeller ? "Seller Dashboard" : "Seller Account"}</button>
                         </>
                     )}
 
