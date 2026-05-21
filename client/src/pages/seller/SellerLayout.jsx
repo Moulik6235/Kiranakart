@@ -20,6 +20,7 @@ const SellerLayout = () => {
         try {
             const { data } = await axios.post('/api/seller/logout');
             if (data.success) {
+                localStorage.removeItem('kiranakart_seller_token');
                 setIsSeller(false)
                 toast.success(data.message)
                 navigate('/')

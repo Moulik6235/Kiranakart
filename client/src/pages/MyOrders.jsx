@@ -379,6 +379,7 @@ const MyOrders = () => {
         try {
             const { data } = await axios.post('/api/user/logout')
             if (data.success) {
+                localStorage.removeItem('kiranakart_token');
                 toast.success("Successfully logged out!")
                 window.location.href = "/"
             }

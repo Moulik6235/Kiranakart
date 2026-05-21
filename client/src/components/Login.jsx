@@ -96,6 +96,9 @@ const Login = () => {
             setLoading(true);
             const { data } = await axios.post('/api/user/verify-otp', { phone, otp: otpCode });
             if (data.success) {
+                if (data.token) {
+                    localStorage.setItem('kiranakart_token', data.token);
+                }
                 handleLoginSuccess(data.user);
             } else {
                 toast.error(data.message);
@@ -134,6 +137,9 @@ const Login = () => {
                 name, email, password
             })
             if (data.success) {
+                if (data.token) {
+                    localStorage.setItem('kiranakart_token', data.token);
+                }
                 handleLoginSuccess(data.user);
             } else {
                 toast.error(data.message)

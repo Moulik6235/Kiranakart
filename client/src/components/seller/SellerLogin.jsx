@@ -23,6 +23,9 @@ const SellerLogin = () => {
             setLoading(true);
             const { data } = await axios.post('/api/seller/login', { email, password })
             if (data.success) {
+                if (data.token) {
+                    localStorage.setItem('kiranakart_seller_token', data.token);
+                }
                 setIsSeller(true)
                 toast.success("Successfully logged in as Seller!");
                 navigate('/seller')

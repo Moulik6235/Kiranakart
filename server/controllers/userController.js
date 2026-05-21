@@ -31,7 +31,7 @@ export const register = async (req, res) => {
             maxAge: 7 * 24 * 60 * 60 * 1000, //Cookie expiration time
         })
 
-        return res.json({ success: true, user: { email: user.email, name: user.name, cartItems: user.cartItems } })
+        return res.json({ success: true, token, user: { email: user.email, name: user.name, cartItems: user.cartItems } })
 
 
     } catch (error) {
@@ -68,7 +68,7 @@ export const login = async (req, res) => {
             maxAge: 7 * 24 * 60 * 60 * 1000,
         })
 
-        return res.json({ success: true, user: { email: user.email, name: user.name, cartItems: user.cartItems } })
+        return res.json({ success: true, token, user: { email: user.email, name: user.name, cartItems: user.cartItems } })
     } catch (error) {
         console.log(error.message);
         res.json({ success: false, message: error.message });
@@ -270,6 +270,7 @@ export const verifyOTP = async (req, res) => {
         return res.json({ 
             success: true, 
             message: "Login successful!",
+            token,
             user: { email: user.email, name: user.name, phone: user.phone, cartItems: user.cartItems } 
         });
     } catch (error) {

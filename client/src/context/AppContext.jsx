@@ -7,6 +7,22 @@ import axios from "axios";
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
 
+// Automatically attach stored tokens to request headers as a robust fallback for cross-domain cookieless environments (like Vercel subdomains)
+axios.interceptors.request.use((config) => {
+    const token = localStorage.getItem('kiranakart_token');
+    const sellerToken = localStorage.getItem('kiranakart_seller_token');
+    if (token) {
+        config.headers['token'] = token;
+        config.headers['Authorization'] = `Bearer ${token}`;
+    }
+    if (sellerToken) {
+        config.headers['sellerToken'] = sellerToken;
+    }
+    return config;
+}, (error) => {
+    return Promise.reject(error);
+});
+
 export const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
