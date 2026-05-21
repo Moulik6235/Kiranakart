@@ -15,7 +15,6 @@ KiranaKart is a state-of-the-art quick-commerce grocery solution styled after le
 ### 2. 📲 Frictionless Mobile OTP Login & Auto-Signups
 * **Auto-Advancing Verification Boxes**: Polished 4-digit numeric verification inputs that dynamically jump focus as the user types and backspaces.
 * **Resend SMS Protection**: Visual 60-second countdown timer to secure API resources against spam.
-* **Dual SMS Provider Integration**: Seamless native `fetch` dispatcher that interfaces directly with **Fast2SMS** (India) or **Twilio** (Global) without heavy package dependencies.
 
 ### 3. 🎯 Customer Cart & Smart Goal Trackers
 * **AOV Booster Tracker**: Displays a responsive progress bar under the shopping cart showing how close the customer is to unlocking free delivery (*"Add ₹49 more for FREE Delivery"*).
@@ -69,14 +68,6 @@ MONGODB_URI = "mongodb+srv://<username>:<password>@cluster.mongodb.net/kiranakar
 SELLER_EMAIL = "seller@kiranakart.com"
 SELLER_PASSWORD = "your_secure_password"
 
-# Optional: Real SMS Gateway Credentials
-# For Indian Numbers (Fast2SMS):
-FAST2SMS_API_KEY = "your_fast2sms_api_key"
-
-# OR For Global Numbers (Twilio):
-TWILIO_ACCOUNT_SID = "your_twilio_sid"
-TWILIO_AUTH_TOKEN = "your_twilio_token"
-TWILIO_PHONE_NUMBER = "your_twilio_purchased_phone_number"
 ```
 
 #### Frontend (`client/.env`)
