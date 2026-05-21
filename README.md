@@ -69,14 +69,6 @@ MONGODB_URI = "mongodb+srv://<username>:<password>@cluster.mongodb.net/kiranakar
 SELLER_EMAIL = "seller@kiranakart.com"
 SELLER_PASSWORD = "your_secure_password"
 
-# Optional: Real SMS Gateway Credentials
-# For Indian Numbers (Fast2SMS):
-FAST2SMS_API_KEY = "your_fast2sms_api_key"
-
-# OR For Global Numbers (Twilio):
-TWILIO_ACCOUNT_SID = "your_twilio_sid"
-TWILIO_AUTH_TOKEN = "your_twilio_token"
-TWILIO_PHONE_NUMBER = "your_twilio_purchased_phone_number"
 ```
 
 #### Frontend (`client/.env`)
