@@ -322,7 +322,11 @@ const Cart = () => {
 
                                 {/* Add Button or Quantity Selector */}
                                 <div className="shrink-0">
-                                    {qty === 0 ? (
+                                    {product.stock !== undefined && product.stock <= 0 ? (
+                                        <span className="px-2.5 py-1 bg-rose-50 border border-rose-100 text-rose-600 font-extrabold text-[9px] rounded-lg select-none uppercase tracking-wide">
+                                            Out of Stock
+                                        </span>
+                                    ) : qty === 0 ? (
                                         <button
                                             onClick={() => updateCartItem(product._id, 1)}
                                             className="px-3.5 py-1 bg-white border border-[#4F46E5] text-[#4F46E5] hover:bg-indigo-50 font-extrabold text-[10px] rounded-lg transition active:scale-95 cursor-pointer shadow-3xs"

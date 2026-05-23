@@ -61,13 +61,13 @@ const AllProducts = () => {
                 ))}
             </div>
 
-            {filteredProducts.filter((product)=> product.inStock).length === 0 ? (
+            {filteredProducts.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-16 text-center">
                     <p className="text-gray-400 text-lg">No products found in this category.</p>
                 </div>
             ) : (
                 <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6 lg:grid-cols-5 mt-4 mb-16' >
-                    {filteredProducts.filter((product)=> product.inStock).map((product, index)=>(
+                    {filteredProducts.map((product, index)=>(
                         <ProductCard key={index} product={product}/>
                     ))}
                 </div>

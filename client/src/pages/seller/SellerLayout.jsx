@@ -14,6 +14,7 @@ const SellerLayout = () => {
         { name: "Product List", path: "/seller/product-list", icon: assets.product_list_icon },
         { name: "Order", path: "/seller/orders", icon: assets.order_icon },
         { name: "Store Settings", path: "/seller/settings", icon: assets.box_icon },
+        { name: "Notifications", path: "/seller/notifications", icon: "🔔" },
     ];
 
     const logout = async () => {
@@ -63,7 +64,11 @@ const SellerLayout = () => {
                                 }`
                             }
                         >
-                            <img src={item.icon} alt="icon" className="w-7 h-7" />
+                            {typeof item.icon === 'string' && !item.icon.startsWith('/') && !item.icon.startsWith('data:') ? (
+                                <span className="text-xl w-7 h-7 flex items-center justify-center shrink-0">{item.icon}</span>
+                            ) : (
+                                <img src={item.icon} alt="icon" className="w-7 h-7 shrink-0" />
+                            )}
                             <p className="md:block hidden text-center">{item.name}</p>
                         </NavLink>
                     ))}

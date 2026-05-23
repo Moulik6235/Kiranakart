@@ -13,6 +13,7 @@ const AddProduct = () => {
   const [offerPrice, setOfferPrice] = useState('');
   const [unit, setUnit] = useState('');
   const [quantityValue, setQuantityValue] = useState('');
+  const [stock, setStock] = useState('100');
 
   const { axios } = useAppContext()
 
@@ -27,7 +28,8 @@ const AddProduct = () => {
         price: Number(price),
         offerPrice: Number(offerPrice),
         unit,
-        quantityValue: Number(quantityValue)
+        quantityValue: Number(quantityValue),
+        stock: Number(stock)
       }
 
       const formData = new FormData();
@@ -47,6 +49,7 @@ const AddProduct = () => {
         setOfferPrice('')
         setQuantityValue('')
         setUnit('')
+        setStock('100')
         setFiles([])
       } else {
         toast.error(data.message)
@@ -139,6 +142,13 @@ const AddProduct = () => {
             <input onChange={(e) => setOfferPrice(e.target.value)} value={offerPrice} id="offer-price" type="number" placeholder="0" className="outline-none md:py-2.5 py-2 px-3 rounded border border-gray-500/40" required />
           </div>
         </div>
+
+        <div className="flex flex-col gap-1 max-w-md">
+          <label className="text-base font-medium" htmlFor="stock">Initial Stock Quantity</label>
+          <input onChange={(e) => setStock(e.target.value)} value={stock}
+            id="stock" type="number" placeholder="100" className="outline-none md:py-2.5 py-2 px-3 rounded border border-gray-500/40" required />
+        </div>
+
         <button className="px-8 py-2.5 bg-primary text-white font-medium rounded cursor-pointer">ADD</button>
       </form>
     </div>

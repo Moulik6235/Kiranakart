@@ -82,7 +82,11 @@ const HotDeals = () => {
 
                                     {/* Action Button */}
                                     <div>
-                                        {inCartCount === 0 ? (
+                                        {product.stock !== undefined && product.stock <= 0 ? (
+                                            <span className="bg-rose-50 text-rose-600 border border-rose-200 px-3.5 py-2.5 rounded-xl font-bold text-xs select-none uppercase tracking-wide">
+                                                Out of Stock
+                                            </span>
+                                        ) : inCartCount === 0 ? (
                                             <button 
                                                 onClick={() => addToCart(product._id)}
                                                 className="bg-primary hover:bg-primary-container text-white p-2.5 rounded-xl hover:shadow-md transition active:scale-95 cursor-pointer flex items-center justify-center"
@@ -95,14 +99,14 @@ const HotDeals = () => {
                                             <div className="flex items-center bg-surface-container border border-outline-variant/30 rounded-xl overflow-hidden shadow-sm">
                                                 <button 
                                                     onClick={() => removeFromCart(product._id)}
-                                                    className="px-3 py-1.5 text-on-surface hover:bg-outline-variant/30 font-extrabold text-sm active:scale-95 transition"
+                                                    className="px-3 py-1.5 text-on-surface hover:bg-outline-variant/30 font-extrabold text-sm active:scale-95 transition cursor-pointer"
                                                 >
                                                     -
                                                 </button>
                                                 <span className="px-2 font-black text-on-surface text-sm">{inCartCount}</span>
                                                 <button 
                                                     onClick={() => addToCart(product._id)}
-                                                    className="px-3 py-1.5 text-primary hover:bg-outline-variant/30 font-extrabold text-sm active:scale-95 transition"
+                                                    className="px-3 py-1.5 text-primary hover:bg-outline-variant/30 font-extrabold text-sm active:scale-95 transition cursor-pointer"
                                                 >
                                                     +
                                                 </button>

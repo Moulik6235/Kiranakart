@@ -22,6 +22,7 @@ import ProductList from './pages/seller/ProductList';
 import Orders from './pages/seller/Orders';
 import Loading from './components/Loading';
 import StoreSettings from './pages/seller/StoreSettings';
+import Notifications from './pages/seller/Notifications';
 
 const App = () => {
   const isSellerPath = useLocation().pathname.includes("seller");
@@ -51,6 +52,7 @@ const App = () => {
             <Route path='product-list' element={<ProductList />} />
               <Route path='orders' element={<Orders />} />
               <Route path='settings' element={<StoreSettings />} />
+              <Route path='notifications' element={<Notifications />} />
           </Route>
 
 

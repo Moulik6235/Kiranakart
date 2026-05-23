@@ -88,16 +88,22 @@ const Navbar = () => {
                                     </div>
                                     <div className="flex items-center gap-3">
                                         <span className="text-xs font-black text-slate-800">{currency}{p.offerPrice}</span>
-                                        <button 
-                                            onMouseDown={(e) => {
-                                                e.preventDefault();
-                                                e.stopPropagation();
-                                                addToCart(p._id);
-                                            }}
-                                            className="px-2.5 py-1 bg-emerald-50 hover:bg-emerald-600 hover:text-white border border-emerald-100 hover:border-emerald-600 text-emerald-600 text-[10px] font-black rounded-lg transition active:scale-95 cursor-pointer shadow-xs"
-                                        >
-                                            + Add
-                                        </button>
+                                        {p.stock !== undefined && p.stock <= 0 ? (
+                                            <span className="text-[10px] font-black text-rose-500 bg-rose-50 border border-rose-100 px-2 py-1 rounded-lg select-none uppercase tracking-wide">
+                                                Sold Out
+                                            </span>
+                                        ) : (
+                                            <button 
+                                                onMouseDown={(e) => {
+                                                    e.preventDefault();
+                                                    e.stopPropagation();
+                                                    addToCart(p._id);
+                                                }}
+                                                className="px-2.5 py-1 bg-emerald-50 hover:bg-emerald-600 hover:text-white border border-emerald-100 hover:border-emerald-600 text-emerald-600 text-[10px] font-black rounded-lg transition active:scale-95 cursor-pointer shadow-xs"
+                                            >
+                                                + Add
+                                            </button>
+                                        )}
                                     </div>
                                 </div>
                             ))

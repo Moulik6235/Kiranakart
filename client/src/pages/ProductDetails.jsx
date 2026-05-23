@@ -81,13 +81,21 @@ const ProductDetails = () => {
                         </ul>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row items-center mt-10 gap-4 text-base">
-                        <button onClick={() => addToCart(product._id)} className="w-full py-4 rounded-xl cursor-pointer font-bold bg-surface-container border border-outline-variant text-on-surface hover:bg-surface-container-high transition shadow-sm" >
-                            Add to Cart
-                        </button>
-                        <button onClick={() => { addToCart(product._id); navigate("/cart") }} className="w-full py-4 rounded-xl cursor-pointer font-bold bg-primary text-white hover:bg-primary-container shadow-sm active:scale-95 transition" >
-                            Buy now
-                        </button>
+                    <div className="flex flex-col sm:flex-row items-center mt-10 gap-4 text-base w-full">
+                        {product.stock !== undefined && product.stock <= 0 ? (
+                            <div className="w-full py-4 rounded-xl font-extrabold bg-rose-50 border border-rose-200 text-rose-700 text-center select-none uppercase tracking-wider">
+                                ⚠️ Temporarily Out of Stock
+                            </div>
+                        ) : (
+                            <>
+                                <button onClick={() => addToCart(product._id)} className="w-full py-4 rounded-xl cursor-pointer font-bold bg-surface-container border border-outline-variant text-on-surface hover:bg-surface-container-high transition shadow-sm" >
+                                    Add to Cart
+                                </button>
+                                <button onClick={() => { addToCart(product._id); navigate("/cart") }} className="w-full py-4 rounded-xl cursor-pointer font-bold bg-primary text-white hover:bg-primary-container shadow-sm active:scale-95 transition" >
+                                    Buy now
+                                </button>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>
@@ -98,7 +106,7 @@ const ProductDetails = () => {
                     <div className="w-20 h-1 bg-primary rounded-full mt-2"></div>
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6 lg:grid-cols-5 mt-10 w-full">
-                    {relatedProducts.filter((product)=> product.inStock).map((product, index)=> (
+                    {relatedProducts.map((product, index)=> (
                         <ProductCard key={index} product={product}/>
                     ))}
                 </div>

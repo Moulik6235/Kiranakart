@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import SellerNotification from '../models/SellerNotification.js';
 
 
 // Login Seller : /api/seller/login
@@ -54,5 +55,32 @@ export const sellerLogout = async (req, res) => {
         console.log(error.message);
         res.json({ success: false, message: error.message });
 
+    }
+}
+
+// Get Seller Notifications: /api/seller/notifications
+export const getNotifications = async (req, res) => {
+    try {
+        const notifications = await SellerNotification.find({}).sort({ createdAt: -1 });
+        return res.json({ success: true, notifications });
+    } catch (error) {
+        console.log(error.message);
+        res.json({ success: false, message: error.message });
+    }
+}
+
+// Mark Notification as Read: /api/seller/notifications/read
+export const markNotificationRead = async (req, res) => {
+    try {
+        const { id } = req.body;
+        if (id) {
+            await SellerNotification.findByIdAndUpdate(id, { read: true });
+        } else {
+            await SellerNotification.updateMany({ read: false }, { read: true });
+        }
+        return res.json({ success: true, message: "Notifications updated" });
+    } catch (error) {
+        console.log(error.message);
+        res.json({ success: false, message: error.message });
     }
 }

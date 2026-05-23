@@ -1,6 +1,35 @@
 import Order from "../models/Order.js";
 import Product from "../models/Product.js";
-import User from "../models/User.js"
+import User from "../models/User.js";
+import SellerNotification from "../models/SellerNotification.js";
+
+const deductStockAndNotify = async (items) => {
+    try {
+        for (const item of items) {
+            const product = await Product.findById(item.product);
+            if (product) {
+                const newStock = Math.max(0, (product.stock || 100) - item.quantity);
+                const inStock = newStock > 0;
+                
+                await Product.findByIdAndUpdate(item.product, {
+                    stock: newStock,
+                    inStock: inStock
+                });
+
+                // If stock reaches 0, create a seller notification
+                if (newStock === 0) {
+                    await SellerNotification.create({
+                        message: `⚠️ Stock Alert: "${product.name}" is now out of stock!`,
+                        type: "warning",
+                        productId: product._id
+                    });
+                }
+            }
+        }
+    } catch (err) {
+        console.error("Error in deductStockAndNotify:", err.message);
+    }
+};
 
 
 // Place Order COD :  /api/order/cod
@@ -32,6 +61,10 @@ export const placeOrderCOD = async (req, res) => {
             address,
             paymentType: "COD"
         });
+
+        // Deduct stock and notify seller
+        await deductStockAndNotify(items);
+
         return res.json({ success: true, message: "Order Placed Successfully" });
 
 
@@ -102,6 +135,8 @@ export const verifyMockUPI = async (req, res) => {
             if (order) {
                 // Clear User cart
                 await User.findByIdAndUpdate(order.userId, { cartItems: {} });
+                // Deduct stock and notify seller
+                await deductStockAndNotify(order.items);
             }
             res.json({ success: true, message: "Payment Verified" });
         } else {

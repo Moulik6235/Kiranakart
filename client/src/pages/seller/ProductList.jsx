@@ -8,11 +8,13 @@ const ProductList = () => {
   const [editingId, setEditingId] = useState(null)
   const [editPrice, setEditPrice] = useState('')
   const [editOfferPrice, setEditOfferPrice] = useState('')
+  const [editStock, setEditStock] = useState('')
 
   const startEdit = (product) => {
     setEditingId(product._id)
     setEditPrice(product.price)
     setEditOfferPrice(product.offerPrice)
+    setEditStock(product.stock !== undefined ? product.stock : 100)
   }
 
   const cancelEdit = () => {
@@ -21,17 +23,21 @@ const ProductList = () => {
 
   const savePrice = async (id) => {
     try {
-      const { data } = await axios.post('/api/product/update-price', {
+      const resPrice = await axios.post('/api/product/update-price', {
         id,
         price: Number(editPrice),
         offerPrice: Number(editOfferPrice)
       })
-      if (data.success) {
-        toast.success("Prices updated successfully!")
+      const resStock = await axios.post('/api/product/stock', {
+        id,
+        stock: Number(editStock)
+      })
+      if (resPrice.data.success && resStock.data.success) {
+        toast.success("Product updated successfully!")
         fetchProducts()
         setEditingId(null)
       } else {
-        toast.error(data.message)
+        toast.error(resPrice.data.message || resStock.data.message)
       }
     } catch (error) {
       toast.error(error.message)
@@ -64,7 +70,8 @@ const ProductList = () => {
                 <th className="px-4 py-3 font-semibold">Category</th>
                 <th className="px-4 py-3 font-semibold">Original Price</th>
                 <th className="px-4 py-3 font-semibold">Selling Price</th>
-                <th className="px-4 py-3 font-semibold">In Stock</th>
+                <th className="px-4 py-3 font-semibold">Stock Qty</th>
+                <th className="px-4 py-3 font-semibold">Status</th>
                 <th className="px-4 py-3 font-semibold">Actions</th>
               </tr>
             </thead>
@@ -112,11 +119,27 @@ const ProductList = () => {
                     )}
                   </td>
                   <td className="px-4 py-3">
-                    <label className="relative inline-flex items-center cursor-pointer text-gray-900 gap-3">
-                      <input onClick={() => toggleStock(product._id, !product.inStock)} checked={product.inStock} type="checkbox" className="sr-only peer" />
-                      <div className="w-11 h-6 bg-slate-200 rounded-full peer peer-checked:bg-primary transition-colors duration-200"></div>
-                      <span className="dot absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform duration-200 ease-in-out peer-checked:translate-x-5"></span>
-                    </label>
+                    {editingId === product._id ? (
+                      <input 
+                        type="number" 
+                        value={editStock} 
+                        onChange={(e) => setEditStock(e.target.value)} 
+                        className="w-16 border border-gray-300 rounded px-2 py-1 text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                      />
+                    ) : (
+                      <span className={`font-bold ${product.stock <= 0 ? 'text-rose-600' : 'text-gray-800'}`}>
+                        {product.stock !== undefined ? product.stock : 100} pcs
+                      </span>
+                    )}
+                  </td>
+                  <td className="px-4 py-3">
+                    <span className={`px-2.5 py-1 rounded-full text-xs font-black select-none ${
+                      product.inStock && (product.stock === undefined || product.stock > 0)
+                        ? "bg-emerald-50 text-emerald-700 border border-emerald-100" 
+                        : "bg-rose-50 text-rose-700 border border-rose-100"
+                    }`}>
+                      {product.inStock && (product.stock === undefined || product.stock > 0) ? "In Stock" : "Out of Stock"}
+                    </span>
                   </td>
                   <td className="px-4 py-3">
                     {editingId === product._id ? (
@@ -139,7 +162,7 @@ const ProductList = () => {
                         onClick={() => startEdit(product)} 
                         className="border border-primary text-primary hover:bg-primary hover:text-white px-3 py-1.5 rounded text-xs font-semibold cursor-pointer transition-all duration-200"
                       >
-                        Edit Price
+                        Edit Product
                       </button>
                     )}
                   </td>
