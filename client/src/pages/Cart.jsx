@@ -280,6 +280,81 @@ const Cart = () => {
         }
     }, [products, cartItems])
 
+    // Select 4-5 recommended products that are not currently in the cart
+    const recommendedProducts = products
+        .filter(item => !cartItems[item._id])
+        .slice(0, 5);
+
+    const RecommendationSection = () => {
+        if (recommendedProducts.length === 0) return null;
+        return (
+            <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 text-left animate-fadeIn">
+                <div className="flex items-center gap-2 mb-4 select-none">
+                    <span className="text-lg">✨</span>
+                    <h3 className="font-extrabold text-gray-900 text-sm tracking-tight uppercase">Frequently Added Together</h3>
+                </div>
+                <div className="space-y-4">
+                    {recommendedProducts.map((product) => {
+                        const originalPrice = product.price && product.price > product.offerPrice ? product.price : product.offerPrice + 15;
+                        const qty = cartItems[product._id] || 0;
+                        return (
+                            <div key={product._id} className="flex items-center justify-between gap-3 pb-3 border-b border-gray-100/50 last:border-b-0 last:pb-0">
+                                <div 
+                                    onClick={() => navigate(`/products/${product.category.toLowerCase()}/${product._id}`)}
+                                    className="flex items-center gap-3 cursor-pointer flex-1 min-w-0"
+                                >
+                                    <div className="w-12 h-12 bg-gray-50 border border-gray-100 rounded-xl flex items-center justify-center p-1 shrink-0">
+                                        <img className="max-w-full max-h-full object-contain" src={product.image[0]} alt={product.name} />
+                                    </div>
+                                    <div className="min-w-0 flex-1">
+                                        <h4 className="font-extrabold text-gray-800 text-[11px] leading-tight truncate">
+                                            {product.name}
+                                        </h4>
+                                        <p className="text-[9px] font-bold text-gray-400 mt-0.5">
+                                            {product.quantityValue && product.unit ? `${product.quantityValue} ${product.unit}` : (product.weight || "1 unit")}
+                                        </p>
+                                        <div className="flex items-center gap-1.5 mt-0.5">
+                                            <span className="font-extrabold text-xs text-gray-900">{currency}{product.offerPrice}</span>
+                                            <span className="text-[9px] font-bold text-gray-400 line-through">{currency}{originalPrice}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Add Button or Quantity Selector */}
+                                <div className="shrink-0">
+                                    {qty === 0 ? (
+                                        <button
+                                            onClick={() => updateCartItem(product._id, 1)}
+                                            className="px-3.5 py-1 bg-white border border-[#4F46E5] text-[#4F46E5] hover:bg-indigo-50 font-extrabold text-[10px] rounded-lg transition active:scale-95 cursor-pointer shadow-3xs"
+                                        >
+                                            + ADD
+                                        </button>
+                                    ) : (
+                                        <div className="flex items-center bg-[#4F46E5] text-white px-2 py-1 rounded-lg gap-2 shadow-xs">
+                                            <button 
+                                                onClick={() => updateCartItem(product._id, qty - 1)}
+                                                className="hover:opacity-80 font-black text-xs w-3 text-center cursor-pointer select-none"
+                                            >
+                                                -
+                                            </button>
+                                            <span className="font-extrabold text-xs w-3 text-center select-none">{qty}</span>
+                                            <button 
+                                                onClick={() => updateCartItem(product._id, qty + 1)}
+                                                className="hover:opacity-80 font-black text-xs w-3 text-center cursor-pointer select-none"
+                                            >
+                                                +
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+        );
+    };
+
 
 
     const handleShare = () => {
@@ -299,7 +374,7 @@ const Cart = () => {
 
     return (
         <div className="min-h-screen bg-[#F4F6F8] py-8 pb-32">
-            <div className="max-w-5xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] gap-6 items-start">
+            <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-[1.5fr_1.1fr_0.9fr] gap-6 items-start">
                 
                 {/* Left Column: Cart items & Dynamic Options */}
                 <div className="space-y-4">
@@ -496,7 +571,10 @@ const Cart = () => {
                             )}
                         </div>
                     )}
-
+                    {/* Mobile/Tablet Recommended Products Section */}
+                    <div className="lg:hidden">
+                        <RecommendationSection />
+                    </div>
                 </div>
 
                 {/* Right Column: Address, Payment Methods, Bill Details */}
@@ -730,6 +808,11 @@ const Cart = () => {
                         </div>
                     </div>
 
+                </div>
+
+                {/* Desktop Third Column: Recommended Products */}
+                <div className="hidden lg:block space-y-4">
+                    <RecommendationSection />
                 </div>
 
             </div>

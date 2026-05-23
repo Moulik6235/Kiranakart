@@ -406,7 +406,7 @@ const Navbar = () => {
 
                         {/* 2. White Rounded Profile / Settings Silhouette Button */}
                         <div 
-                            onClick={() => setOpen(!open)}
+                            onClick={() => user ? navigate("/my-orders") : setShowUserLogin(true)}
                             className="w-12 h-12 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm cursor-pointer active:scale-95 transition"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-slate-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
