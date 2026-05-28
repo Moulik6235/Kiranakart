@@ -384,7 +384,7 @@ const MyOrders = () => {
     // Logout Helper
     const logout = async () => {
         try {
-            const { data } = await axios.post('/api/user/logout')
+            const { data } = await axios.get('/api/user/logout')
             if (data.success) {
                 localStorage.removeItem('kiranakart_token');
                 toast.success("Successfully logged out!")
