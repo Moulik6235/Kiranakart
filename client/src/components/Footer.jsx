@@ -4,8 +4,8 @@ import { assets } from "../assets/greencart_assets/assets"
 const Footer = () => {
     return (
         <footer className="w-full mt-16 bg-surface-container-high border-t border-outline-variant/15">
-            {/* Top Footer: 4-Column Grid */}
-            <div className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24 xl:px-32 py-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-on-surface-variant">
+            {/* Top Footer: 4-Column Grid (Hidden on mobile) */}
+            <div className="hidden md:grid max-w-7xl mx-auto px-6 md:px-16 lg:px-24 xl:px-32 py-12 grid-cols-2 md:grid-cols-4 gap-8 text-on-surface-variant">
                 {/* Brand Column */}
                 <div className="col-span-2 md:col-span-1">
                     {/* Logo/Name */}
@@ -70,8 +70,8 @@ const Footer = () => {
                 </div>
             </div>
 
-            {/* Bottom Footer: Legal & Payments */}
-            <div className="border-t border-outline-variant/15">
+            {/* Bottom Footer: Legal & Payments (Hidden on mobile) */}
+            <div className="hidden md:block border-t border-outline-variant/15">
                 <div className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24 xl:px-32 py-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-semibold text-on-surface-variant">
                     <p>© {new Date().getFullYear()} KiranaKart. All rights reserved.</p>
                     
@@ -89,6 +89,15 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
+            </div>
+
+            {/* Mobile Minimalist Footer (Visible only on mobile) */}
+            <div className="md:hidden w-full py-8 flex flex-col items-center justify-center gap-1.5 text-on-surface-variant/80 border-t border-outline-variant/10 select-none pb-24">
+                <div className="flex items-center gap-1.5 text-primary font-black text-base tracking-tight">
+                    <img className="w-5.5 h-5.5 object-contain" src={assets.logo} alt="KiranaKart Logo" />
+                    KiranaKart
+                </div>
+                <p className="text-[10px] font-bold text-outline">© {new Date().getFullYear()} KiranaKart. All rights reserved.</p>
             </div>
         </footer>
     )

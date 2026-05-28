@@ -823,7 +823,7 @@ const Cart = () => {
 
             {/* Bottom Floating Checkout Bar (Styled exactly like mockup screenshot) */}
             {getCartCount() > 0 && (
-                <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 p-4 shadow-[0_-4px_24px_rgba(0,0,0,0.06)] z-40">
+                <div className="fixed bottom-[56px] sm:bottom-0 left-0 right-0 bg-white border-t border-gray-150 p-4 shadow-[0_-4px_24px_rgba(0,0,0,0.06)] z-40">
                     <div className="max-w-5xl mx-auto flex items-center justify-between">
                         
                         {/* Total indicator left */}

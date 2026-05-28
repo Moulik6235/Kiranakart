@@ -23,6 +23,7 @@ import Orders from './pages/seller/Orders';
 import Loading from './components/Loading';
 import StoreSettings from './pages/seller/StoreSettings';
 import Notifications from './pages/seller/Notifications';
+import BottomNavigation from './components/BottomNavigation';
 
 const App = () => {
   const isSellerPath = useLocation().pathname.includes("seller");
@@ -30,6 +31,7 @@ const App = () => {
   return (
     <div className='text-default min-h-screen text-gray-700 bg-white'>
       {isSellerPath ? null : <Navbar />}
+      {isSellerPath ? null : <BottomNavigation />}
       {showUserLogin ? <Login /> : null}
       <Toaster />
       <HelpSupportModal />

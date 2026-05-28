@@ -87,6 +87,19 @@ body {
   animation: fadeIn 0.2s ease-out forwards;
 }
 
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.animate-slideUp {
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 /* Seamless Neon Dark Mode Support overrides */
 html.dark {
   --color-background: #090d16;

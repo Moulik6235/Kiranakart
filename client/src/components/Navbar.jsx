@@ -199,7 +199,7 @@ const Navbar = () => {
                     
                     {/* Delivery address widget */}
                     <div 
-                        onClick={() => user ? setShowLocationModal(true) : setShowUserLogin(true)}
+                        onClick={() => setShowLocationModal(true)}
                         className="hidden md:flex flex-col text-left cursor-pointer shrink-0 select-none group relative"
                     >
                         <span className="text-[13px] font-extrabold text-gray-900 tracking-tight leading-tight">
@@ -209,7 +209,7 @@ const Navbar = () => {
                             <span className="max-w-[150px] md:max-w-[200px] truncate">
                                 {selectedAddress 
                                     ? `${selectedAddress.street}, ${selectedAddress.city}` 
-                                    : "LIG Housing Board Colony, Ch..."}
+                                    : "Current Location"}
                             </span>
                             <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3 text-gray-800 transition-transform group-hover:translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
@@ -369,22 +369,19 @@ const Navbar = () => {
                     
                     {/* Brand in Delivery Duration */}
                     <div className="flex flex-col text-left">
-                        <span className="text-xs font-black text-slate-800 tracking-tight leading-none uppercase">
-                            KiranaKart in
-                        </span>
-                        <span className="text-[34px] font-black text-slate-900 tracking-tighter leading-none mt-1 animate-pulse">
-                            {deliveryTime} minutes
+                        <span className="text-sm font-black text-slate-900 tracking-tight leading-none">
+                            Delivery in {deliveryTime} minutes
                         </span>
                         
                         {/* Interactive address dropdown selector */}
                         <div 
-                            onClick={() => user ? setShowLocationModal(true) : setShowUserLogin(true)}
+                            onClick={() => setShowLocationModal(true)}
                             className="flex items-center gap-1.5 text-xs font-black text-slate-850 hover:text-slate-950 mt-2.5 cursor-pointer select-none leading-none"
                         >
                             <span className="max-w-[210px] truncate">
                                 {selectedAddress 
                                     ? `${(selectedAddress.category || 'HOME').toUpperCase()} - ${selectedAddress.street}` 
-                                    : "HOME - LIG Housing Board Colony, Ch..."}
+                                    : "Current Location"}
                             </span>
                             <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5 text-slate-805 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
@@ -447,7 +444,7 @@ const Navbar = () => {
                 <div className="absolute top-full left-0 w-full bg-white shadow-xl border-t border-gray-100 py-6 flex flex-col gap-4 px-6 text-base sm:hidden z-50 animate-fadeIn">
                     {/* Delivery Address widget in mobile drawer */}
                     <div 
-                        onClick={() => { setOpen(false); user ? setShowLocationModal(true) : setShowUserLogin(true); }}
+                        onClick={() => { setOpen(false); setShowLocationModal(true); }}
                         className="flex flex-col text-left py-2 border-b border-gray-50 cursor-pointer"
                     >
                         <span className="text-[12px] font-extrabold text-gray-900 leading-tight">
@@ -457,7 +454,7 @@ const Navbar = () => {
                             <span className="truncate">
                                 {selectedAddress 
                                     ? `${selectedAddress.street}, ${selectedAddress.city}` 
-                                    : "LIG Housing Board Colony, Ch..."}
+                                    : "Current Location"}
                             </span>
                             <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
